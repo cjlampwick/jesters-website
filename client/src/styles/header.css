@@ -1,0 +1,27 @@
+.app-header {
+    height: 60px;
+    border-bottom: 1px solid #CCC;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-top: -10px;
+    overflow: hidden;
+    width: 100vw;
+    margin-left: 0px;
+}
+
+.menu-item.main div {
+    margin-top: -60px !important;
+    color:white;
+}
+.menu-item.main {
+    text-align: center;
+    border-top: 60px solid;
+    border-left: 60px solid transparent;
+    border-right: 60px solid transparent;
+}
+
+.menu-item {
+    text-align: center;
+    padding-top: 20px;
+}
+
