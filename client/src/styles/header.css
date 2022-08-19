@@ -1,27 +1,52 @@
 .app-header {
-    height: 60px;
+    height: 45px;
     border-bottom: 1px solid #CCC;
-    font-weight: 500;
+    font-weight: 700;
     text-transform: uppercase;
-    margin-top: -10px;
     overflow: hidden;
     width: 100vw;
     margin-left: 0px;
+    cursor: pointer;
+    letter-spacing: 2px;
+    z-index: 99999;
+
+    /* sticky */
+    position: fixed;
+    top: 0;
+    width: 100%;
 }
 
 .menu-item.main div {
     margin-top: -60px !important;
-    color:white;
+    color:rgb(58, 58, 58);
+    width: 100%;
+}
+
+.menu-item.main:hover div {
+    margin-top: -60px !important;
+    color: #FFF;
+}
+.menu-item.main:hover{
+    color:rgb(58, 58, 58);
 }
 .menu-item.main {
     text-align: center;
     border-top: 60px solid;
     border-left: 60px solid transparent;
     border-right: 60px solid transparent;
+    color: #CCC;
 }
 
 .menu-item {
     text-align: center;
-    padding-top: 20px;
+    padding-top: 10px;
+}
+
+.menu-item.side {
+    color:#CCC;
+}
+
+.menu-item.side:hover {
+    color:white;
 }
 
