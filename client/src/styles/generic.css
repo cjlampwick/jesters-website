@@ -1,13 +1,27 @@
-.spacing{
-    margin-top: 80px;
+.spacing {
+  margin-top: 80px;
 }
 
-.carousel-image-jesters{
-    width: 100%;
-    height: 400px;
-    margin: auto;
+.carousel-image-jesters {
+  width: 100%;
+  height: 400px;
+  margin: auto;
 }
 
-.carousel-image-jesters img{
-    width: 100%;
+.carousel-image-jesters img {
+  width: 100%;
+}
+
+.carousel-photo-jesters {
+  width: 100%;
+  height: 500px;
+  margin: auto;
+}
+
+.carousel-photo-jesters img {
+  width: 100%;
+}
+
+.jesters-title {
+  font-size: 1.75rem !important;
 }
