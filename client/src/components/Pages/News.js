@@ -10,9 +10,20 @@ import "../../styles/footer.css";
 
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+
 import Spacing from "../../components/Spacing";
+import JSCard from "../Generic/JSCard";
+
+import NewsContent from "../News/NewsContent";
+
+
+
+
 
 class News extends React.Component {
+
+
+  
   render() {
     return (
       <div>
@@ -28,7 +39,9 @@ class News extends React.Component {
         >
           <Header />
           <Spacing />
-          News
+          <NewsContent/>
+          <Spacing />
+          <NewsContent/>
           <Spacing />
           <Footer />
         </div>

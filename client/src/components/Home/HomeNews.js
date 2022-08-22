@@ -1,5 +1,5 @@
 import React from "react";
-import HomeCard from "./HomeCard";
+import JSCard from "../Generic/JSCard";
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -11,7 +11,7 @@ class HomeNews extends React.Component {
     for (let x = 0; x < 3; x++) {
       cards.push(
         <Col>
-          <HomeCard />
+          <JSCard/>
         </Col>
       );
     }
