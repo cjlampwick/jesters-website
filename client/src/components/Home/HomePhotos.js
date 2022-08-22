@@ -25,7 +25,9 @@ class HomePhotos extends React.Component {
     return (
       <div>
         <p className="jesters-title">Photos</p>
-        <Carousel slide>{items}</Carousel>
+        <div style={{borderRadius: "10px", overflow: "hidden"}}>
+          <Carousel slide>{items}</Carousel>
+        </div>
       </div>
     );
   }

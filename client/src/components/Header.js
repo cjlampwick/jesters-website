@@ -3,18 +3,20 @@ import "../styles/header.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
+import { Link } from "react-router-dom";
+
 class Header extends React.Component {
   render() {
     return (
       <Row className="app-header justify-content-md-center">
         <Col className="menu-item side" xs lg="2">
-          Noticias
+          <Link to="/news">Noticias</Link>
         </Col>
         <Col className="menu-item side" xs lg="2">
-          Nosotros
+        <Link to="/us">Nosotros</Link>
         </Col>
         <Col className="menu-item main" md="2">
-          <div>Inicio</div>
+          <div><Link to="/">Inicio</Link></div>
         </Col>
         <Col className="menu-item side" xs lg="2">
           University

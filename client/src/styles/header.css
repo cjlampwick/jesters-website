@@ -22,13 +22,29 @@
     width: 100%;
 }
 
+.menu-item a{
+    color: #CCC;
+    text-decoration: none;
+}
+
+.menu-item.main a{
+    color:rgb(58, 58, 58);
+    text-decoration: none;
+}
+
+.menu-item.main:hover a{
+    color: #FFF;
+}
+
 .menu-item.main:hover div {
     margin-top: -60px !important;
     color: #FFF;
 }
+
 .menu-item.main:hover{
     color:rgb(58, 58, 58);
 }
+
 .menu-item.main {
     text-align: center;
     border-top: 60px solid;

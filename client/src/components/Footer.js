@@ -1,7 +1,4 @@
 import React from "react";
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 
 class Footer extends React.Component {
   render() {
@@ -11,7 +8,7 @@ class Footer extends React.Component {
           <div className="container-fluid text-center text-md-left">
             <div className="row">
               <div className="col-md-6 mt-md-0 mt-3">
-                <h5>Jesters Esports</h5>
+                <h5 className="text-uppercase">Jesters Esports</h5>
                 <p>
                   Iniciando como una comunidad gamer en el año 2020,<br/> 
                   dimos todo para convertirnos en la organización de Esports que somos hoy en día.<br/>
@@ -26,16 +23,19 @@ class Footer extends React.Component {
                 <h5 className="text-uppercase">Redes Sociales</h5>
                 <ul className="list-unstyled">
                   <li>
-                    <a href="#!">Twitter</a>
+                    <a href="https://twitter.com/JestersEsports">Twitter</a>
                   </li>
                   <li>
-                    <a href="#!">Instagram</a>
+                    <a href="https://www.instagram.com/jestersesports/">Instagram</a>
                   </li>
                   <li>
                     <a href="#!">YouTube</a>
                   </li>
                   <li>
                     <a href="#!">TikTok</a>
+                  </li>
+                  <li>
+                    <a href="https://discord.gg/TwGqewVA">Discord</a>
                   </li>
                 </ul>
               </div>
