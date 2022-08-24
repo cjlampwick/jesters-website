@@ -15,17 +15,24 @@ import Spacing from "../../components/Spacing";
 import JSCard from "../Generic/JSCard";
 
 import NewsContent from "../News/NewsContent";
-
-
-
-
-
+import axios from "axios";
 class News extends React.Component {
 
+  constructor(props) {
+    super(props);
 
-  
+    this.state = {};
+  }
+
+  async componentDidMount() {
+    const res = await axios.get('http://localhost:3000/news');
+    this.setState({ news: res.data.news });
+    console.log(this.state);
+  }
+
+
   render() {
-    return (
+    return (this.state.news &&
       <div>
         <video autoPlay muted loop id="myVideo">
           <source src={background} type="video/mp4" />
@@ -39,9 +46,7 @@ class News extends React.Component {
         >
           <Header />
           <Spacing />
-          <NewsContent/>
-          <Spacing />
-          <NewsContent/>
+          <NewsContent news={this.state.news} />
           <Spacing />
           <Footer />
         </div>

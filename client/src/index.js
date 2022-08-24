@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 
 import App from "./App";
 import News from "./components/Pages/News";
+import Login from "./components/Pages/Login";
 import Us from "./components/Pages/Us";
 
 
@@ -17,6 +18,7 @@ root.render(
       <Route path="/" element={<App />} />
       <Route path="/news" element={<News />} />
       <Route path="/us" element={<Us />} />
+      <Route path="/login" element={<Login />} />
     </Routes>
   </BrowserRouter>
 );

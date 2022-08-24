@@ -9,25 +9,34 @@ import Col from "react-bootstrap/Col";
 
 import Container from "react-bootstrap/Container";
 
-class News extends React.Component {
+class NewsContent extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = { news: props.news };
+        console.log(props.news);
+    }
+
     render() {
+        let showNews = [];
+
+        this.state.news.map((news) => {
+            showNews.push(
+                <Col>
+                    <JSCard title={news.title} body={news.body} author={news.author} image={news.image} />
+                </Col>
+            );
+        })
+
         return (
             <div>
                 <Container>
                     <Row>
-                        <Col>
-                            <JSCard />
-                        </Col>
-                        <Col>
-                            <JSCard />
-                        </Col>
-                        <Col>
-                            <JSCard />
-                        </Col>
+                        {showNews}
                     </Row>
                 </Container>
             </div>
         );
     }
 }
-export default News;
+export default NewsContent;
