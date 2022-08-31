@@ -19,10 +19,11 @@ class Header extends React.Component {
           <div><Link to="/">Inicio</Link></div>
         </Col>
         <Col className="menu-item side" xs lg="2">
-          University
+        <Link to="/university"> University </Link>
         </Col>
         <Col className="menu-item side" xs lg="2">
-          Coworking
+        <Link to="/coworking"> Coworking </Link>
+          
         </Col>
       </Row>
     );

@@ -9,13 +9,10 @@ import "../../styles/generic.css";
 import "../../styles/footer.css";
 
 import Header from "../../components/Header";
-import Spacing from "../../components/Spacing";
 import Footer from "../../components/Footer";
+import Spacing from "../../components/Spacing";
 
-import LoginContents from "../Login/LoginContents";
-
-class LoginPage extends React.Component {
-
+class University extends React.Component {
   render() {
     return (
       <div>
@@ -31,12 +28,11 @@ class LoginPage extends React.Component {
         >
           <Header />
           <Spacing />
-          <LoginContents />
-          <Spacing />
           <Footer />
         </div>
       </div>
     );
   }
 }
-export default LoginPage;
+
+export default University;

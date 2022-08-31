@@ -16,3 +16,9 @@ code {
   text-align: center;
    margin: auto;
 }
+.containerPrincipal{
+  width: 350px;
+  text-align: center;
+  position: relative;
+  left: 780px;
+}
