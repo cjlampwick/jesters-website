@@ -1,0 +1,49 @@
+.js-calendar {
+  text-align: center;
+  color: white;
+  background-color: #000000;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: rgb(255, 255, 255);
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.position {
+  width: 1375px;
+  position: relative;
+  left: 270px;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rbc-toolbar button {
+  color: white !important;
+}
+
+.rbc-day-bg{
+  cursor: pointer !important;
+}

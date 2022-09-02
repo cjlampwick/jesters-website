@@ -14,6 +14,7 @@ import Spacing from "../../components/Spacing";
 
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
+import JSCalendar from "../Coworking/JSCalendar";
 
 
 class Coworking extends React.Component {
@@ -32,9 +33,10 @@ class Coworking extends React.Component {
                 >
                     <Header />
                     <Spacing />
+                    <JSCalendar/>
+                    <Spacing />
                     <div className="text-center" >
-                        
-                    <Link to="/login"> <Button className='btn btn-secondary' onClick={() => this.redirect()}>Agendar</Button> </Link>
+                        <Link to="/login"> <Button className='btn btn-secondary' onClick={() => this.redirect()}>Agendar</Button> </Link>
                     </div>
                     <Footer />
                 </div>
