@@ -1,6 +1,6 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ReactDOM  from "react-dom/client";
+import { BrowserRouter, Routes, Route} from "react-router-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
@@ -10,19 +10,24 @@ import Login from "./components/Pages/Login";
 import Us from "./components/Pages/Us";
 import University from "./components/Pages/University";
 import Coworking from "./components/Pages/Coworking";
-
+import NotFound from "./components/Pages/NotFound";
+// import Schedule from "./components/Pages/Coworking/:Agendar";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<App />} />
-      <Route path="/news" element={<News />} />
-      <Route path="/us" element={<Us />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/university" element={<University />} />
-      <Route path="/coworking" element={<Coworking />} />
+      
+        <Route path="/" element={<App />} />
+        <Route path="/news" element={<News />} />
+        <Route path="/us" element={<Us />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/university" element={<University />} />
+        <Route path="/coworking" element={<Coworking />} />
+        <Route path="/*" element={<NotFound />} />
+        {/* <Route path="/coworking/:agendar" component={<Schedule />} /> */}
+      
     </Routes>
   </BrowserRouter>
 );

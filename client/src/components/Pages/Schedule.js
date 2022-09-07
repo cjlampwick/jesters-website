@@ -17,7 +17,7 @@ import { Link } from "react-router-dom";
 import JSCalendar from "../Coworking/JSCalendar";
 
 
-class Coworking extends React.Component {
+class Schedule extends React.Component {
     render() {
         return (
             <div>
@@ -33,10 +33,8 @@ class Coworking extends React.Component {
                 >
                     <Header />
                     <Spacing />
+                    <JSCalendar/>
                     <Spacing />
-                    <div className="text-center" >
-                        <Link to="/login"> <Button className='btn btn-secondary'>Agendar</Button> </Link>
-                    </div>
                     <Spacing />
                     <Footer />
                 </div>
@@ -45,4 +43,4 @@ class Coworking extends React.Component {
     }
 }
 
-export default Coworking;
+export default Schedule;
