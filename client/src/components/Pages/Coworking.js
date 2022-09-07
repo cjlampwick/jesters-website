@@ -38,6 +38,7 @@ class Coworking extends React.Component {
                     <div className="text-center" >
                         <Link to="/login"> <Button className='btn btn-secondary' onClick={() => this.redirect()}>Agendar</Button> </Link>
                     </div>
+                    <Spacing />
                     <Footer />
                 </div>
             </div>
