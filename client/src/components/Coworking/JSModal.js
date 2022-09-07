@@ -33,7 +33,7 @@ class JSModal extends React.Component {
   render() {
     return (
       <>
-        <Modal show={this.state.show} onHide={this.handleClose}>
+        <Modal style={{marginTop: "120px"}} show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Dia "x"</Modal.Title>
           </Modal.Header>

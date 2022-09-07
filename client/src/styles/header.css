@@ -4,7 +4,6 @@
     font-weight: 700;
     text-transform: uppercase;
     overflow: hidden;
-    width: 100vw;
     margin-left: 0px;
     cursor: pointer;
     letter-spacing: 2px;
@@ -13,7 +12,7 @@
     /* sticky */
     position: fixed;
     top: 0;
-    width: 100%;
+    width: 100vw;
 }
 
 .menu-item.main div {
