@@ -10,29 +10,11 @@ import "../../styles/footer.css";
 
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
-
 import Spacing from "../../components/Spacing";
-import JSCard from "../Generic/JSCard";
 
-import NewsContent from "../News/NewsContent";
-import axios from "axios";
-class News extends React.Component {
-
-  constructor(props) {
-    super(props);
-
-    this.state = {};
-  }
-
-  async componentDidMount() {
-    const res = await axios.get('http://localhost:3000/news');
-    this.setState({ news: res.data.news });
-    console.log(this.state);
-  }
-
-
+class University extends React.Component {
   render() {
-    return (this.state.news &&
+    return (
       <div>
         <video autoPlay muted loop id="myVideo">
           <source src={background} type="video/mp4" />
@@ -46,8 +28,6 @@ class News extends React.Component {
         >
           <Header />
           <Spacing />
-          <NewsContent news={this.state.news} />
-          <Spacing />
           <Footer />
         </div>
       </div>
@@ -55,4 +35,4 @@ class News extends React.Component {
   }
 }
 
-export default News;
+export default University;

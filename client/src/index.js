@@ -6,7 +6,10 @@ import reportWebVitals from "./reportWebVitals";
 
 import App from "./App";
 import News from "./components/Pages/News";
+import Login from "./components/Pages/Login";
 import Us from "./components/Pages/Us";
+import University from "./components/Pages/University";
+import Coworking from "./components/Pages/Coworking";
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -17,6 +20,9 @@ root.render(
       <Route path="/" element={<App />} />
       <Route path="/news" element={<News />} />
       <Route path="/us" element={<Us />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/university" element={<University />} />
+      <Route path="/coworking" element={<Coworking />} />
     </Routes>
   </BrowserRouter>
 );
