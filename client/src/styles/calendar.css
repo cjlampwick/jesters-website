@@ -7,7 +7,7 @@
 .position {
   width: 1375px;
   position: relative;
-  left: 270px;
+  margin: auto;
 }
 
 .App-logo {

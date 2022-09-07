@@ -10,25 +10,35 @@ import Login from "./components/Pages/Login";
 import Us from "./components/Pages/Us";
 import University from "./components/Pages/University";
 import Coworking from "./components/Pages/Coworking";
-import NotFound from "./components/Pages/NotFound";
-// import Schedule from "./components/Pages/Coworking/:Agendar";
+import Scheduler from "./components/Pages/Scheduler";
+
+// Generic
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Spacing from "./components/Spacing";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <BrowserRouter>
+    {/* Generic */}
+    <Header />
+    <Spacing />
+
+    {/* Component */}
     <Routes>
-      
-        <Route path="/" element={<App />} />
-        <Route path="/news" element={<News />} />
-        <Route path="/us" element={<Us />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/university" element={<University />} />
-        <Route path="/coworking" element={<Coworking />} />
-        <Route path="/*" element={<NotFound />} />
-        {/* <Route path="/coworking/:agendar" component={<Schedule />} /> */}
-      
+      <Route path="/" element={<App />} />
+      <Route path="/news" element={<News />} />
+      <Route path="/us" element={<Us />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/university" element={<University />} />
+      <Route path="/coworking" element={<Coworking />} />
+      <Route path="/coworking/scheduler" element={<Scheduler />} />
     </Routes>
+
+    {/* Footer */}
+    <Spacing />
+    <Footer />
   </BrowserRouter>
 );
 

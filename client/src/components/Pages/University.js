@@ -8,8 +8,6 @@ import "../../styles/home.css";
 import "../../styles/generic.css";
 import "../../styles/footer.css";
 
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
 import Spacing from "../../components/Spacing";
 
 class University extends React.Component {
@@ -22,13 +20,8 @@ class University extends React.Component {
 
         <div
           className="App"
-          style={{
-            height: `100vh`,
-          }}
         >
-          <Header />
-          <Spacing />
-          <Footer />
+          University
         </div>
       </div>
     );

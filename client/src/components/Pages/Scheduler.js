@@ -9,11 +9,12 @@ import "../../styles/generic.css";
 import "../../styles/footer.css";
 
 import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import HomeContent from "../../components/Home/HomeContent";
 import Spacing from "../../components/Spacing";
+import Footer from "../../components/Footer";
 
-class Home extends React.Component {
+import JSCalendar from "../Coworking/JSCalendar";
+
+class Scheduler extends React.Component {
   render() {
     return (
       <div>
@@ -24,11 +25,10 @@ class Home extends React.Component {
         <div
           className="App"
         >
-          <HomeContent />
+          <JSCalendar />
         </div>
       </div>
     );
   }
 }
-
-export default Home;
+export default Scheduler;

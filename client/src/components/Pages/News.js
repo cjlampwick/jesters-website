@@ -12,7 +12,6 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
 import Spacing from "../../components/Spacing";
-import JSCard from "../Generic/JSCard";
 
 import NewsContent from "../News/NewsContent";
 import axios from "axios";
@@ -40,15 +39,8 @@ class News extends React.Component {
 
         <div
           className="App"
-          style={{
-            height: `100vh`,
-          }}
         >
-          <Header />
-          <Spacing />
           <NewsContent news={this.state.news} />
-          <Spacing />
-          <Footer />
         </div>
       </div>
     );

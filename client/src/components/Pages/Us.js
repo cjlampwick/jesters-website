@@ -22,15 +22,8 @@ class Us extends React.Component {
 
         <div
           className="App"
-          style={{
-            height: `100vh`,
-          }}
         >
-          <Header />
-          <Spacing />
           Nosotros
-          <Spacing />
-          <Footer />
         </div>
       </div>
     );
