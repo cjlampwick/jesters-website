@@ -8,14 +8,10 @@ import "../../styles/home.css";
 import "../../styles/generic.css";
 import "../../styles/footer.css";
 
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import Spacing from "../../components/Spacing";
-
 import Button from 'react-bootstrap/Button';
 import { Link } from "react-router-dom";
-import JSCalendar from "../Coworking/JSCalendar";
 
+import Spacing from "../../components/Spacing";
 
 class Coworking extends React.Component {
     render() {
@@ -27,19 +23,12 @@ class Coworking extends React.Component {
 
                 <div
                     className="App"
-                    style={{
-                        height: `100vh`,
-                    }}
-                >
-                    <Header />
-                    <Spacing />
-                    <JSCalendar/>
+                >   
                     <Spacing />
                     <div className="text-center" >
-                        <Link to="/login"> <Button className='btn btn-secondary' onClick={() => this.redirect()}>Agendar</Button> </Link>
+                        <Link to="/coworking/scheduler"> <Button className='btn btn-secondary'>Agendar</Button> </Link>
                     </div>
                     <Spacing />
-                    <Footer />
                 </div>
             </div>
         );

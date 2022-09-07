@@ -25,15 +25,8 @@ class LoginPage extends React.Component {
 
         <div
           className="App"
-          style={{
-            height: `100vh`,
-          }}
         >
-          <Header />
-          <Spacing />
           <LoginContents />
-          <Spacing />
-          <Footer />
         </div>
       </div>
     );

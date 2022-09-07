@@ -35,7 +35,7 @@ class JSModal extends React.Component {
       <>
         <Modal style={{marginTop: "120px"}} show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Dia "x"</Modal.Title>
+            <Modal.Title>{this.state.startDate.toDateString()}</Modal.Title>
           </Modal.Header>
           <Modal.Body>Quiere reservar este dia?</Modal.Body>
           <Modal.Footer>
