@@ -4,9 +4,11 @@ import { BrowserRouter, Routes, Route} from "react-router-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 
+// Pages
 import App from "./App";
 import News from "./components/Pages/News";
 import Login from "./components/Pages/Login";
+import Register from "./components/Pages/Register";
 import Us from "./components/Pages/Us";
 import University from "./components/Pages/University";
 import Coworking from "./components/Pages/Coworking";
@@ -31,6 +33,7 @@ root.render(
       <Route path="/news" element={<News />} />
       <Route path="/us" element={<Us />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/Register" element={<Register />} />
       <Route path="/university" element={<University />} />
       <Route path="/coworking" element={<Coworking />} />
       <Route path="/coworking/scheduler" element={<Scheduler />} />

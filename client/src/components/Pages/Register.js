@@ -9,9 +9,9 @@ import "../../styles/generic.css";
 import "../../styles/footer.css";
 
 
-import LoginContents from "../Login/LoginContents";
+import RegisterContents from "../Register/RegisterContents";
 
-class LoginPage extends React.Component {
+class RegisterPage extends React.Component {
 
   render() {
     return (
@@ -23,10 +23,10 @@ class LoginPage extends React.Component {
         <div
           className="App"
         >
-          <LoginContents />
+          <RegisterContents />
         </div>
       </div>
     );
   }
 }
-export default LoginPage;
+export default RegisterPage;
