@@ -18,6 +18,7 @@ import Scheduler from "./components/Pages/Scheduler";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Spacing from "./components/Spacing";
+import Home from "./components/Pages/Home";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -29,11 +30,11 @@ root.render(
 
     {/* Component */}
     <Routes>
-      <Route path="/" element={<App />} />
+      <Route path="/" element={<Home />} />
       <Route path="/news" element={<News />} />
       <Route path="/us" element={<Us />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/Register" element={<Register />} />
+      <Route path="/register" element={<Register />} />
       <Route path="/university" element={<University />} />
       <Route path="/coworking" element={<Coworking />} />
       <Route path="/coworking/scheduler" element={<Scheduler />} />

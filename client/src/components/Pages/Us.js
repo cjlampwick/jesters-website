@@ -8,10 +8,6 @@ import "../../styles/home.css";
 import "../../styles/generic.css";
 import "../../styles/footer.css";
 
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import Spacing from "../../components/Spacing";
-
 class Us extends React.Component {
   render() {
     return (

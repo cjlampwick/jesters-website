@@ -8,8 +8,6 @@ import "../../styles/home.css";
 import "../../styles/generic.css";
 import "../../styles/footer.css";
 
-import Spacing from "../../components/Spacing";
-
 class University extends React.Component {
   render() {
     return (

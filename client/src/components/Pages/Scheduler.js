@@ -8,10 +8,6 @@ import "../../styles/home.css";
 import "../../styles/generic.css";
 import "../../styles/footer.css";
 
-import Header from "../../components/Header";
-import Spacing from "../../components/Spacing";
-import Footer from "../../components/Footer";
-
 import JSCalendar from "../Coworking/JSCalendar";
 
 class Scheduler extends React.Component {

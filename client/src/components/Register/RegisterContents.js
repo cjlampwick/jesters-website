@@ -1,89 +1,100 @@
+// import {useState} from "react";
 import React from "react";
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 
-import md5 from 'md5';
-import Cookies from 'universal-cookie'
-import axios from 'axios';
+import "../../App.css";
 
-const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
-const [register, setRegister] = useState(false);
+import axios from "axios";
 
-const baseUrl = "http://localhost:3001/login"
-const cookies = new Cookies();
-
-
+const baseUrl = "http://localhost:3001/register";
 
 class RegisterContents extends React.Component {
-    state = {
-        form: {
-            username: '',
-            password: ''
-        }
-    }
+  state = {
+    email: "",
+    username: "",
+    password: "",
+    post: "",
+    register: false,
+    triedRegister: false,
+  };
 
+  handleChange = async (e) => {
+    await this.setState({
+      [e.target.name]: e.target.value,
+    });
+    console.log(this.state);
+  };
+  
+  Register = async () => {
+    await axios
+      .post(baseUrl, {
+        email: this.state.email,
+        username: this.state.username,
+        password: this.state.password,
+      })
+      .then((result) => {
+        this.setState({ register: true });
+      })
+      .catch((error) => {
+        error = new Error();
+      });
 
-    handleChange = async e => {
-        await this.setState({
-            form: {
-                ...this.state.form,
-                [e.target.name]: e.target.value
-            }
-        })
-        console.log(this.state.form);
-    }
-
-
-    iniciarSesion = async () => {
-
-    }
-
-
-    render() {
-        const handleSubmit = (e) => {
-            // prevent the form from refreshing the whole page
-            e.preventDefault();
-            // make a popup alert showing the "submitted" text
-            alert("Submited");
-        }
-        return (
-            <Form onSubmit={(e) => handleSubmit(e)}>
-                {/* email */}
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Ingresar Email </Form.Label>
-                    <Form.Control
-                        type="email"
-                        name="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Enter email"
-                    />
-                </Form.Group>
-
-                {/* password */}
-                <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Ingrear password</Form.Label>
-                    <Form.Control
-                        type="password"
-                        name="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Password"
-                    />
-                </Form.Group>
-
-                {/* submit button */}
-                <Button
-                    variant="primary"
-                    type="submit"
-                    onClick={(e) => handleSubmit(e)}
-                >
-                    Register
-                </Button>
-            </Form>
-        );
-    }
+    this.setState({ triedRegister: true });
+  };
+  render() {
+    return (
+      <div className="containerPrincipal">
+        <div className="containerSecundario">
+          <div className="form-group">
+            <label>Email: </label>
+            <br></br>
+            <input
+              type="email"
+              className="form-control"
+              name="email"
+              placeholder="Ingrese Email"
+              onChange={this.handleChange}
+            />
+            <br></br>
+            <label>UserName: </label>
+            <br></br>
+            <input
+              type=""
+              className="form-control"
+              name="username"
+              placeholder="Ingrese nombre de usuario"
+              onChange={this.handleChange}
+            />
+            <br></br>
+            <label>Contraseña: </label>
+            <br></br>
+            <input
+              type="password"
+              className="form-control"
+              name="password"
+              placeholder="Ingrese Contraseña"
+              onChange={this.handleChange}
+            />
+            <br></br>
+            <button
+              className="btn btn-secondary"
+              onClick={() => this.Register()}
+            >
+              Registrarse
+            </button>
+            {this.state.triedRegister == true ? (
+              this.state.register == true ? (
+                window.location.href = "http://localhost:3000/"
+              ) : (
+                <p className="text-danger">You Are Not Logged in</p>
+              )
+            ) : (
+              <></>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default RegisterContents;
