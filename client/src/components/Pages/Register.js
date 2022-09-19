@@ -8,7 +8,11 @@ import "../../styles/home.css";
 import "../../styles/generic.css";
 import "../../styles/footer.css";
 
-class University extends React.Component {
+
+import RegisterContents from "../Register/RegisterContents";
+
+class RegisterPage extends React.Component {
+
   render() {
     return (
       <div>
@@ -19,11 +23,10 @@ class University extends React.Component {
         <div
           className="App"
         >
-          University
+          <RegisterContents />
         </div>
       </div>
     );
   }
 }
-
-export default University;
+export default RegisterPage;

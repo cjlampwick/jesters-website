@@ -1,6 +1,7 @@
 import React from "react";
 import { Calendar, momentLocalizer } from "react-big-calendar";
 import moment from "moment";
+import { Redirect } from "react-router-dom";
 
 import JSModal from "../Coworking/JSModal";
 import Spacing from "../Spacing";
@@ -10,19 +11,19 @@ import "../../styles/calendar.css";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
+import Cookies from "universal-cookie";
 const localizer = momentLocalizer(moment);
 const events = [{ start: new Date(), end: new Date(), title: "Today" }];
 const DnDCalendar = withDragAndDrop(Calendar);
+const cookies = new Cookies();
 
 class JSCalendar extends React.Component {
   state = {
     events,
     showHidden: false,
   };
-   
   onEventResize = (data) => {
     const { start, end } = data;
-    alert("asdasd");
     this.setState((state) => {
       state.events[0].start = start;
       state.events[0].end = end;
@@ -39,12 +40,26 @@ class JSCalendar extends React.Component {
   };
 
   selectSlot = (data) => {
-    this.slotData = data;
-    this.setState({ showHidden: true });
+    debugger;
+    if (cookies && cookies.get('email')) {
+      this.slotData = data;
+      this.setState({ showHidden: true });
+    } else {
+      window.location.href = "/login";  
+    }
   };
 
   closeModal = (data) => {
     this.setState({ showHidden: false });
+  };
+
+  
+
+  logOut = () => {
+    cookies.remove('email', {path: '/' });
+    cookies.remove('token', {path: '/' });
+    window.location.href = "/login";
+
   };
 
   render() {
@@ -54,7 +69,9 @@ class JSCalendar extends React.Component {
         <div style={{ display: "none" }}>
           <Spacing />
 
-          {this.state.showHidden && <JSModal onCloseModal={this.closeModal} slotData={this.slotData} />}
+          {this.state.showHidden && (
+            <JSModal onCloseModal={this.closeModal} slotData={this.slotData} />
+          )}
         </div>
         <div className="js-calendar position">
           <DnDCalendar
@@ -68,6 +85,7 @@ class JSCalendar extends React.Component {
             style={{ height: "730px" }}
           />
         </div>
+        
       </div>
     );
   }

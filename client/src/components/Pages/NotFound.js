@@ -8,7 +8,11 @@ import "../../styles/home.css";
 import "../../styles/generic.css";
 import "../../styles/footer.css";
 
-class University extends React.Component {
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import Spacing from "../../components/Spacing";
+
+class NotFound extends React.Component {
   render() {
     return (
       <div>
@@ -16,14 +20,15 @@ class University extends React.Component {
           <source src={background} type="video/mp4" />
         </video>
 
-        <div
-          className="App"
-        >
-          University
+        <div className="App">
+          <Header />
+          <Spacing />
+          <div className="">Pagina no encontrada</div>
+          <Footer />
         </div>
       </div>
     );
   }
 }
 
-export default University;
+export default NotFound;
