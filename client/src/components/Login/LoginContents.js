@@ -84,7 +84,7 @@ class LoginContents extends React.Component {
               <button
                 className="btn btn-secondary"
                 onClick={() => this.iniciarSesion()}
-              >
+              > 
                 Iniciar Sesion
               </button>
               <button
@@ -100,7 +100,7 @@ class LoginContents extends React.Component {
                 (window.location.href =
                   "http://localhost:3000/coworking/scheduler")
               ) : (
-                <p className="text-danger">Email or password incorrect</p>
+                <p className="text-danger">Email or password incorrects</p>
               )
             ) : (
               <></>
