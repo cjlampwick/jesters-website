@@ -45,7 +45,7 @@ class JSCalendar extends React.Component {
       this.slotData = data;
       this.setState({ showHidden: true });
     } else {
-      window.location.href = "/login";
+      window.location.href = "/login";  
     }
   };
 
