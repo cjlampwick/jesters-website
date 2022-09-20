@@ -98,9 +98,9 @@ class LoginContents extends React.Component {
             {this.state.triedLogin == true ? (
               this.state.login == true ? (
                 (window.location.href =
-                  "http://localhost:3000/coworking/scheduler")
+                  "./coworking/scheduler")
               ) : (
-                <p className="text-danger">Email or password incorrect</p>
+                <p className="text-danger">Email or password incorrects</p>
               )
             ) : (
               <></>

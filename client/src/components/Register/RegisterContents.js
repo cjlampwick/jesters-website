@@ -9,8 +9,10 @@ const baseUrl = "http://localhost:3001/register";
 
 class RegisterContents extends React.Component {
   state = {
+    fullName:"",
     email: "",
-    username: "",
+    dateBirth: "",
+    dni: "",
     password: "",
     post: "",
     register: false,
@@ -27,8 +29,10 @@ class RegisterContents extends React.Component {
   Register = async () => {
     await axios
       .post(baseUrl, {
+        fullName: this.state.fullName,
         email: this.state.email,
-        username: this.state.username,
+        dateBirth: this.state.dateBirth,
+        dni: this.state.dni,
         password: this.state.password,
       })
       .then((result) => {
@@ -45,7 +49,7 @@ class RegisterContents extends React.Component {
       <div className="containerPrincipal">
         <div className="containerSecundario">
           <div className="form-group">
-            <label>Email: </label>
+            <label style={{color:"white"}}>Email: </label>
             <br></br>
             <input
               type="email"
@@ -55,17 +59,37 @@ class RegisterContents extends React.Component {
               onChange={this.handleChange}
             />
             <br></br>
-            <label>UserName: </label>
+            <label style={{color:"white"}}>Fecha de nacimiento: </label>
             <br></br>
             <input
-              type=""
+              type="date"
               className="form-control"
-              name="username"
+              name="dateBirth"
+              placeholder=""
+              onChange={this.handleChange}
+            />
+            <br></br>
+            <label style={{color:"white"}}>DNI: </label>
+            <br></br>
+            <input
+              type="number"
+              className="form-control"
+              name="dni"
+              placeholder="Ingrese DNI"
+              onChange={this.handleChange}
+            />
+            <br></br>
+            <label style={{color:"white"}}>FullName: </label>
+            <br></br>
+            <input
+              type="string"
+              className="form-control"
+              name="fullName"
               placeholder="Ingrese nombre de usuario"
               onChange={this.handleChange}
             />
             <br></br>
-            <label>Contraseña: </label>
+            <label style={{color:"white"}}>Contraseña: </label>
             <br></br>
             <input
               type="password"
