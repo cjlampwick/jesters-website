@@ -49,15 +49,26 @@ class JSModal extends React.Component {
               })}
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            Desde: <input type="date" style={{height: "40px"}}></input>
+          <Modal.Body style={{ display: "flex" }}>
+            <div>
+              Desde: <input type="date" style={{ height: "40px" }}></input>
+            </div>
+            <div style={{ margin:"auto" }}>
+              <Form.Select id="disabledSelect" style={{ margin: "0", borderRadius: "0px", height: "40px" }}>
+                <option disabled selected>
+                  Selecciona el horario
+                </option>
+                <option value="item 1">09:00</option>
+                <option value="item 2">13:00</option>
+              </Form.Select>
+            </div>
           </Modal.Body>
           <Modal.Body style={{ display: "flex" }}>
             <div>
-              Hasta:  <input type="date" style={{height: "40px"}}></input>
+              Hasta:  <input type="date" value="" style={{ height: "40px" }}></input>
             </div>
-            <div style={{ marginLeft: "50px"}}>
-              <Form.Select id="disabledSelect" style={{margin: "0", borderRadius: "0px", height: "40px"}}>
+            <div style={{ margin:"auto" }}>
+              <Form.Select id="disabledSelect" style={{ margin: "0", borderRadius: "0px", height: "40px" }}>
                 <option disabled selected>
                   Selecciona el horario
                 </option>

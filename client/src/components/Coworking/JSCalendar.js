@@ -40,7 +40,7 @@ class JSCalendar extends React.Component {
   };
 
   selectSlot = (data) => {
-    debugger;
+
     if (cookies && cookies.get('email')) {
       this.slotData = data;
       this.setState({ showHidden: true });
