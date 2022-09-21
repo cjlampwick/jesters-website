@@ -72,7 +72,7 @@ class JSModal extends React.Component {
                 <option disabled selected>
                   Selecciona el horario
                 </option>
-                <option value="item 1">13:00</option>
+                <option value="item 1">13:000</option>
                 <option value="item 2">18:00</option>
               </Form.Select>
             </div>
