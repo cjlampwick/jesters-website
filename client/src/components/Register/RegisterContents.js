@@ -9,7 +9,7 @@ const baseUrl = "http://localhost:3001/register";
 
 class RegisterContents extends React.Component {
   state = {
-    fullName:"",
+    fullName: "",
     email: "",
     dateBirth: "",
     dni: "",
@@ -25,7 +25,7 @@ class RegisterContents extends React.Component {
     });
     console.log(this.state);
   };
-  
+
   Register = async () => {
     await axios
       .post(baseUrl, {
@@ -49,7 +49,7 @@ class RegisterContents extends React.Component {
       <div className="containerPrincipal">
         <div className="containerSecundario">
           <div className="form-group">
-            <label style={{color:"white"}}>Email: </label>
+            <label style={{ color: "white" }}>Email: </label>
             <br></br>
             <input
               type="email"
@@ -59,7 +59,7 @@ class RegisterContents extends React.Component {
               onChange={this.handleChange}
             />
             <br></br>
-            <label style={{color:"white"}}>Fecha de nacimiento: </label>
+            <label style={{ color: "white" }}>Fecha de nacimiento: </label>
             <br></br>
             <input
               type="date"
@@ -69,7 +69,7 @@ class RegisterContents extends React.Component {
               onChange={this.handleChange}
             />
             <br></br>
-            <label style={{color:"white"}}>DNI: </label>
+            <label style={{ color: "white" }}>DNI: </label>
             <br></br>
             <input
               type="number"
@@ -79,7 +79,7 @@ class RegisterContents extends React.Component {
               onChange={this.handleChange}
             />
             <br></br>
-            <label style={{color:"white"}}>FullName: </label>
+            <label style={{ color: "white" }}>FullName: </label>
             <br></br>
             <input
               type="string"
@@ -89,7 +89,7 @@ class RegisterContents extends React.Component {
               onChange={this.handleChange}
             />
             <br></br>
-            <label style={{color:"white"}}>Contraseña: </label>
+            <label style={{ color: "white" }}>Contraseña: </label>
             <br></br>
             <input
               type="password"
@@ -107,9 +107,9 @@ class RegisterContents extends React.Component {
             </button>
             {this.state.triedRegister == true ? (
               this.state.register == true ? (
-                window.location.href = "http://localhost:3000/"
+                (window.location.href = "http://localhost:3000/")
               ) : (
-                <p className="text-danger">You Are Not Logged in</p>
+                <p className="text-danger">registration failed</p>
               )
             ) : (
               <></>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
 
 class JSModal extends React.Component {
   constructor(props) {
@@ -12,12 +13,12 @@ class JSModal extends React.Component {
       this.handleClose = this.handleClose.bind(this);
       this.handleShow = this.handleShow.bind(this);
     }
-    
+
     if (props.slotData) {
       console.log(JSON.stringify(props.slotData));
       this.state = {
         show: true,
-        startDate: props.slotData.start
+        startDate: props.slotData.start,
       };
     }
   }
@@ -33,11 +34,39 @@ class JSModal extends React.Component {
   render() {
     return (
       <>
-        <Modal style={{marginTop: "120px"}} show={this.state.show} onHide={this.handleClose}>
+        <Modal
+          style={{ marginTop: "120px" }}
+          show={this.state.show}
+          onHide={this.handleClose}
+        >
           <Modal.Header closeButton>
-            <Modal.Title>{this.state.startDate.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</Modal.Title>
+            <Modal.Title>
+              {this.state.startDate.toLocaleDateString("es-ES", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </Modal.Title>
           </Modal.Header>
-          <Modal.Body>Quiere reservar este dia?</Modal.Body>
+          <Modal.Body>
+            Desde: <input type="date" style={{height: "40px"}}></input>
+          </Modal.Body>
+          <Modal.Body style={{ display: "flex" }}>
+            <div>
+              Hasta:  <input type="date" style={{height: "40px"}}></input>
+            </div>
+            <div style={{ marginLeft: "50px"}}>
+              <Form.Select id="disabledSelect" style={{margin: "0", borderRadius: "0px", height: "40px"}}>
+                <option disabled selected>
+                  Selecciona el horario
+                </option>
+                <option value="item 1">09:00 - 18:00</option>
+                <option value="item 2">09:00 - 13:00</option>
+                <option value="item 3">13:00 - 18:00</option>
+              </Form.Select>
+            </div>
+          </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleClose}>
               Cerrar
