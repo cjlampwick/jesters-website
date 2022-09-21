@@ -72,9 +72,8 @@ class JSModal extends React.Component {
                 <option disabled selected>
                   Selecciona el horario
                 </option>
-                <option value="item 1">09:00 - 18:00</option>
-                <option value="item 2">09:00 - 13:00</option>
-                <option value="item 3">13:00 - 18:00</option>
+                <option value="item 1">13:00</option>
+                <option value="item 2">18:00</option>
               </Form.Select>
             </div>
           </Modal.Body>
