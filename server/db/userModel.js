@@ -1,22 +1,22 @@
 const mongoose = require("mongoose");
-const UserSchema = new mongoose.Schema ({
-    
-fullName:{
-  type: String,
-  required: [true, "Please provide a Fullname!"],
-  unique: false,
-}  ,
-email: {
+const UserSchema = new mongoose.Schema({
+
+  fullName: {
+    type: String,
+    required: [true, "Please provide a Fullname!"],
+    unique: false,
+  },
+  email: {
     type: String,
     required: [true, "Please provide an Email!"],
     unique: [true, "Email Exist"],
   },
-dateBirth: {
+  dateBirth: {
     type: Date,
     required: [true, "Please provide a date of birth!"],
     unique: false,
   },
-dni: {
+  dni: {
     type: Number,
     required: [true, "Please provide a DNI!"],
     unique: false,

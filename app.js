@@ -12,6 +12,7 @@ dotenv.config();
 // require database connection
 const dbConnect = require("./server/db/dbConnect");
 const User = require("./server/db/userModel");
+const Appointment = require("./server/db/appointmentModel");
 
 // execute database connection
 dbConnect();
@@ -19,6 +20,7 @@ dbConnect();
 app.use(express.json());
 
 var cors = require("cors");
+const { response } = require("express");
 
 app.use(cors());
 
@@ -26,6 +28,30 @@ app.post("/test", (request, response) => {
   console.log(JSON.stringify(request.body));
 
   response.json(request.body);
+});
+
+app.post("/coworking", (request, response) => {
+  const appointment = new Appointment({
+    // userId: request.body.userId,
+    dateFrom: request.body.dateFrom,
+    dateTo: request.body.dateTo,
+    // pointmentStatus: request.body.ppointmentStatus,
+  });
+  
+  appointment
+    .save()
+    .then((result) => {
+      response.status(201).send({
+        message: "saved date",
+        result,
+      });
+    })
+    .catch((error) => {
+      response.status(500).send({
+        message: "Error saved date",
+        error,
+      });
+    });
 });
 
 // register endpoint
@@ -36,11 +62,14 @@ app.post("/register", (request, response) => {
     const user = new User({
       email: request.body.email,
       password: hashedPassword,
-      fullName:request.body.fullName,
+      fullName: request.body.fullName,
       dateBirth: request.body.dateBirth,
       dni: request.body.dni,
     });
     // save the new user
+
+    console.log("user: ", user);
+
     user
       .save()
       // return success if the new user is added to the database successfully

@@ -46,7 +46,7 @@ class Header extends React.Component {
           fill="white"
           class="bi bi-door-open"
           viewBox="0 0 16 16"
-          style={{ position: "relative",cursor: "pointer" ,right: "-1850px", top: "6px", "z-index" : "99999" }}
+          style={{ position: "relative",cursor: "pointer" ,right: "-1850px", top: "6px", zIndex : "99999" }}
           alt="Cerrar sesion"
           onClick={() => this.logOut()} >
           <path d="M8.5 10c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z" />

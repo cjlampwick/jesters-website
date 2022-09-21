@@ -2,10 +2,21 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import axios from "axios";
+
+const baseUrl = "http://localhost:3001/coworking";
 
 class JSModal extends React.Component {
+
   constructor(props) {
     super(props);
+
+    this.state = {
+      userId: "",
+      dateFrom : "",
+      dateTo: "",
+      appointmentStatus: "",
+    };
 
     if (props.onCloseModal) {
       this.onCloseModal = props.onCloseModal;
@@ -22,6 +33,28 @@ class JSModal extends React.Component {
       };
     }
   }
+  Reserve = async () => {
+    await axios
+      .post(baseUrl, {
+        userId: this.state.userId,
+        dateFrom: this.state.dateFrom,
+        dateTo: this.state.dateTo,
+        appointmentStatus: this.state.appointmentStatus
+      })
+      .then((result) => {
+        console.log("worked");
+      })
+      .catch((error) => {
+        error = new Error();
+      });
+  };
+
+  handleChange = async (e) => {
+    await this.setState({
+      [e.target.name]: e.target.value,
+    });
+    console.log(this.state);
+  };
 
   handleClose() {
     this.onCloseModal();
@@ -39,7 +72,7 @@ class JSModal extends React.Component {
           show={this.state.show}
           onHide={this.handleClose}
         >
-          <Modal.Header closeButton>
+          <Modal.Header closeButton style={{margin:"auto"}}>
             <Modal.Title>
               {this.state.startDate.toLocaleDateString("es-ES", {
                 weekday: "long",
@@ -49,11 +82,11 @@ class JSModal extends React.Component {
               })}
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body style={{ display: "flex" }}>
+          <Modal.Body style={{ display: "flex" }} >
             <div>
-              Desde: <input type="date" style={{ height: "40px" }}></input>
+              Desde: <input type="date" name="dateFrom" style={{ height: "40px" }} onChange={this.handleChange} ></input>
             </div>
-            <div style={{ margin:"auto" }}>
+            <div style={{ margin: "auto" }}>
               <Form.Select id="disabledSelect" style={{ margin: "0", borderRadius: "0px", height: "40px" }}>
                 <option disabled selected>
                   Selecciona el horario
@@ -65,9 +98,9 @@ class JSModal extends React.Component {
           </Modal.Body>
           <Modal.Body style={{ display: "flex" }}>
             <div>
-              Hasta:  <input type="date" value="" style={{ height: "40px" }}></input>
+              Hasta:  <input type="date" name="dateTo" style={{ height: "40px" }} onChange={this.handleChange} ></input>
             </div>
-            <div style={{ margin:"auto" }}>
+            <div style={{ margin: "auto" }}>
               <Form.Select id="disabledSelect" style={{ margin: "0", borderRadius: "0px", height: "40px" }}>
                 <option disabled selected>
                   Selecciona el horario
@@ -77,11 +110,11 @@ class JSModal extends React.Component {
               </Form.Select>
             </div>
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer style={{margin:"auto"}}>
             <Button variant="secondary" onClick={this.handleClose}>
               Cerrar
             </Button>
-            <Button variant="primary" onClick={this.handleShow}>
+            <Button variant="primary" onClick={this.Reserve}>
               Reservar
             </Button>
           </Modal.Footer>
