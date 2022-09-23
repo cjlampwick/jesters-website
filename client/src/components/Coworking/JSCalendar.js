@@ -13,7 +13,7 @@ import "react-big-calendar/lib/css/react-big-calendar.css";
 
 import Cookies from "universal-cookie";
 const localizer = momentLocalizer(moment);
-const events = [{ start: new Date(), end: new Date(), title: "Today" }];
+const events = [];
 const DnDCalendar = withDragAndDrop(Calendar);
 const cookies = new Cookies();
 
@@ -23,14 +23,14 @@ class JSCalendar extends React.Component {
     showHidden: false,
   };
   
-  onEventResize = (data) => {
-    const { start, end } = data;
-    this.setState((state) => {
-      state.events[0].start = start;
-      state.events[0].end = end;
-      return { events: state.events };
-    });
-  };
+  // onEventResize = (data) => {
+  //   const { start, end } = data;
+  //   this.setState((state) => {
+  //     state.events[0].start = start;
+  //     state.events[0].end = end;
+  //     return { events: state.events };
+  //   });
+  // };
 
   onEventDrop = (data) => {
     console.log(data);
@@ -60,6 +60,35 @@ class JSCalendar extends React.Component {
     window.location.href = "/login";
   };
 
+  saveSuccess = (result) => {
+    this.closeModal();
+
+    let events = this.state.events;
+
+    let title = '';
+    
+    title += new Date(result.data.result.dateFrom).toLocaleDateString("es-ES", {
+      year: 'numeric', month: 'numeric', day: 'numeric'
+    })
+
+    title += ' -> ';
+
+    title += new Date(result.data.result.dateTo).toLocaleDateString("es-ES", {
+      year: 'numeric', month: 'numeric', day: 'numeric'
+    })
+
+    events.push({
+      start: result.data.result.dateFrom,
+      end: result.data.result.dateTo,
+      title: title,
+      id: result.data.result._id,
+    });
+
+    this.setState({events});
+
+    console.info(JSON.stringify(result));
+  }
+
   render() {
     return (
       <div>
@@ -68,7 +97,7 @@ class JSCalendar extends React.Component {
           <Spacing />
 
           {this.state.showHidden && (
-            <JSModal onCloseModal={this.closeModal} slotData={this.slotData} />
+            <JSModal onCloseModal={this.closeModal} slotData={this.slotData} saveSuccess={this.saveSuccess}/>
           )}
         </div>
         <div className="js-calendar position">

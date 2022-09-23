@@ -22,6 +22,7 @@ class JSModal extends React.Component {
 
     if (props.onCloseModal) {
       this.onCloseModal = props.onCloseModal;
+      this.saveSuccess = props.saveSuccess;
 
       this.handleClose = this.handleClose.bind(this);
       this.handleShow = this.handleShow.bind(this);
@@ -35,6 +36,7 @@ class JSModal extends React.Component {
       };
     }
   }
+
   Reserve = async () => {
 
     const idUser = cookies.get("id");
@@ -49,8 +51,7 @@ class JSModal extends React.Component {
         // appointmentStatus: this.state.appointmentStatus
       })
       .then((result) => {
-        alert("Felicidades, usted reservo correctamente!");
-        window.location.href="/coworking/scheduler"
+        this.saveSuccess(result);
       })
       .catch((error) => {
         error = new Error();
