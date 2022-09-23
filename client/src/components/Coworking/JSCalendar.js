@@ -22,6 +22,7 @@ class JSCalendar extends React.Component {
     events,
     showHidden: false,
   };
+  
   onEventResize = (data) => {
     const { start, end } = data;
     this.setState((state) => {
@@ -53,13 +54,10 @@ class JSCalendar extends React.Component {
     this.setState({ showHidden: false });
   };
 
-  
-
   logOut = () => {
     cookies.remove('email', {path: '/' });
     cookies.remove('token', {path: '/' });
     window.location.href = "/login";
-
   };
 
   render() {

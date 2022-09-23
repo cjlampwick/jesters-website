@@ -40,11 +40,11 @@ class LoginContents extends React.Component {
 
           cookies.set("id", respuesta.id, { path: "/" });
           cookies.set("email", respuesta.email, { path: "/" });
-          cookies.set("name", respuesta.name, { path: "/" });
-          cookies.set("lastName", respuesta.lastName, { path: "/" });
+          cookies.set("fullName", respuesta.fullName, { path: "/" });
           cookies.set("token", respuesta.token, { path: "/" });
           cookies.set("username", respuesta.username, { path: "/" });
-          alert(`Bienvenido ${respuesta.name} ${respuesta.lastName}`);
+          debugger;
+          alert(`Bienvenido ${respuesta.fullName}`);
           window.location.href = "./";
         } else {
           alert("El usuario o la contraseña son incorrectos");

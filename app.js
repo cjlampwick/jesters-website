@@ -32,12 +32,12 @@ app.post("/test", (request, response) => {
 
 app.post("/coworking", (request, response) => {
   const appointment = new Appointment({
-    // userId: request.body.userId,
+    userId: request.body.userId,
     dateFrom: request.body.dateFrom,
     dateTo: request.body.dateTo,
     // pointmentStatus: request.body.ppointmentStatus,
   });
-  
+
   appointment
     .save()
     .then((result) => {
@@ -53,7 +53,6 @@ app.post("/coworking", (request, response) => {
       });
     });
 });
-
 // register endpoint
 app.post("/register", (request, response) => {
   // hash the password
@@ -137,6 +136,8 @@ app.post("/login", (request, response) => {
             //   return success response
             response.status(200).send({
               message: "Login Successful",
+              id: user._id,
+              fullName: user.fullName,
               email: user.email,
               token,
             });

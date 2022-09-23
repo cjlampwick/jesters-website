@@ -3,6 +3,8 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
+import Cookies from "universal-cookie";
+const cookies = new Cookies();
 
 const baseUrl = "http://localhost:3001/coworking";
 
@@ -34,15 +36,21 @@ class JSModal extends React.Component {
     }
   }
   Reserve = async () => {
+
+    const idUser = cookies.get("id");
+
+    debugger;
+
     await axios
       .post(baseUrl, {
-        userId: this.state.userId,
+        userId: idUser,
         dateFrom: this.state.dateFrom,
         dateTo: this.state.dateTo,
-        appointmentStatus: this.state.appointmentStatus
+        // appointmentStatus: this.state.appointmentStatus
       })
       .then((result) => {
-        console.log("worked");
+        alert("Felicidades, usted reservo correctamente!");
+        window.location.href="/coworking/scheduler"
       })
       .catch((error) => {
         error = new Error();
@@ -105,7 +113,7 @@ class JSModal extends React.Component {
                 <option disabled selected>
                   Selecciona el horario
                 </option>
-                <option value="item 1">13:000</option>
+                <option value="item 1">13:00</option>
                 <option value="item 2">18:00</option>
               </Form.Select>
             </div>

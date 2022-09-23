@@ -11,6 +11,11 @@ const AppointmentSchema = new mongoose.Schema({
     required: [true, "Please provide a date to!"],
     unique: false,
   },
+  userId:{
+    type: ObjectId,
+    required: [true, ""],
+    unique: false,
+  }
   
 })
 module.exports = mongoose.model.Appointment || mongoose.model("Appointment", AppointmentSchema);
