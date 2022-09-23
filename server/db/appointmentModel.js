@@ -12,7 +12,8 @@ const AppointmentSchema = new mongoose.Schema({
     unique: false,
   },
   userId:{
-    type: ObjectId,
+    type: mongoose.ObjectId,
+    
     required: [true, ""],
     unique: false,
   }
