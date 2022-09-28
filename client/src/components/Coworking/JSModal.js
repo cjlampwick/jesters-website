@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
+import moment from "moment";
 import Cookies from "universal-cookie";
 const cookies = new Cookies();
 
@@ -41,14 +42,12 @@ class JSModal extends React.Component {
 
     const idUser = cookies.get("id");
 
-    debugger;
-
     await axios
       .post(baseUrl, {
         userId: idUser,
         dateFrom: this.state.dateFrom,
         dateTo: this.state.dateTo,
-        // appointmentStatus: this.state.appointmentStatus
+        
       })
       .then((result) => {
         this.saveSuccess(result);
@@ -59,6 +58,8 @@ class JSModal extends React.Component {
   };
 
   handleChange = async (e) => {
+    debugger;
+
     await this.setState({
       [e.target.name]: e.target.value,
     });
@@ -91,32 +92,34 @@ class JSModal extends React.Component {
               })}
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body style={{ display: "flex" }} >
-            <div>
-              Desde: <input type="date" name="dateFrom" style={{ height: "40px" }} onChange={this.handleChange} ></input>
+          <Modal.Body>
+            <div style={{ display: "flex" }}>
+              <div>
+                Desde: <input type="date" value={moment(this.state.startDate).format('YYYY-MM-DD')} name="dateFrom" style={{ height: "40px" }} ></input>
+              </div>
+              <div style={{ margin: "auto" }}>
+                <Form.Select name="fromHalf" onChange={this.handleChange} style={{ margin: "0", borderRadius: "0px", height: "40px" }}>
+                  <option disabled selected>
+                    Selecciona el horario
+                  </option>
+                  <option value="1">09:00</option>
+                  <option value="2">13:00</option>
+                </Form.Select>
+              </div>
             </div>
-            <div style={{ margin: "auto" }}>
-              <Form.Select id="disabledSelect" style={{ margin: "0", borderRadius: "0px", height: "40px" }}>
-                <option disabled selected>
-                  Selecciona el horario
-                </option>
-                <option value="item 1">09:00</option>
-                <option value="item 2">13:00</option>
-              </Form.Select>
-            </div>
-          </Modal.Body>
-          <Modal.Body style={{ display: "flex" }}>
-            <div>
-              Hasta:  <input type="date" name="dateTo" style={{ height: "40px" }} onChange={this.handleChange} ></input>
-            </div>
-            <div style={{ margin: "auto" }}>
-              <Form.Select id="disabledSelect" style={{ margin: "0", borderRadius: "0px", height: "40px" }}>
-                <option disabled selected>
-                  Selecciona el horario
-                </option>
-                <option value="item 1">13:00</option>
-                <option value="item 2">18:00</option>
-              </Form.Select>
+            <div style={{ display: "flex", marginTop: '10px' }}>
+              <div>
+                Hasta:  <input type="date" name="dateTo" style={{ height: "40px" }} ></input>
+              </div>
+              <div style={{ margin: "auto" }}>
+                <Form.Select name="toHalf" onChange={this.handleChange} style={{ margin: "0", borderRadius: "0px", height: "40px" }}>
+                  <option disabled selected>
+                    Selecciona el horario
+                  </option>
+                  <option value="1">13:00</option>
+                  <option value="2">18:00</option>
+                </Form.Select>
+              </div>
             </div>
           </Modal.Body>
           <Modal.Footer style={{margin:"auto"}}>

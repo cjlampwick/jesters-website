@@ -65,21 +65,21 @@ class JSCalendar extends React.Component {
 
     let events = this.state.events;
 
-    let title = '';
+    debugger;
+
+    let dateFrom = moment(result.data.result.dateFrom).add(3, 'hour')
+    let dateTo = moment(result.data.result.dateTo).add(3, 'hour')
+
+    let dateFromStr = dateFrom.format('DD/MM/YYYY');
+    let dateToStr = dateTo.format('DD/MM/YYYY');
     
-    title += new Date(result.data.result.dateFrom).toLocaleDateString("es-ES", {
-      year: 'numeric', month: 'numeric', day: 'numeric'
-    })
+    let title = dateFromStr + ' -> ' + dateToStr;
 
-    title += ' -> ';
-
-    title += new Date(result.data.result.dateTo).toLocaleDateString("es-ES", {
-      year: 'numeric', month: 'numeric', day: 'numeric'
-    })
+    
 
     events.push({
-      start: result.data.result.dateFrom,
-      end: result.data.result.dateTo,
+      start: dateFrom,
+      end: dateTo.set({hour: 23, minute: 59}),
       title: title,
       id: result.data.result._id,
     });

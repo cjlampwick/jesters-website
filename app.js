@@ -35,6 +35,8 @@ app.post("/coworking", (request, response) => {
     userId: request.body.userId,
     dateFrom: request.body.dateFrom,
     dateTo: request.body.dateTo,
+    halfFrom: 1,
+    halfTo: 2,
     // pointmentStatus: request.body.ppointmentStatus,
   });
 

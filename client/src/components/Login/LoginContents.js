@@ -24,9 +24,11 @@ class LoginContents extends React.Component {
     });
     console.log(this.state.form);
   };
+   
   redireccionar() {
     window.location.href = "/register";
-  }
+  };
+
   iniciarSesion = async () => {
     await axios
       .post(baseUrl, {
@@ -43,8 +45,6 @@ class LoginContents extends React.Component {
           cookies.set("fullName", respuesta.fullName, { path: "/" });
           cookies.set("token", respuesta.token, { path: "/" });
           cookies.set("username", respuesta.username, { path: "/" });
-          debugger;
-          alert(`Bienvenido ${respuesta.fullName}`);
           window.location.href = "./";
         } else {
           alert("El usuario o la contraseña son incorrectos");
