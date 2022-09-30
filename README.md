@@ -22,9 +22,9 @@
 ```bash
   npm install
 ```
-4. Para correr el proyecto se deben ejecutar el siguiente comando:
+4. Para correr el proyecto se debe ejecutar el siguiente comando:
 
- En la carpeta jesters-website ejecutar:
+ En la carpeta que estamos parados "jesters-website" ejecutar:
 
 ```bash
   npm run start
