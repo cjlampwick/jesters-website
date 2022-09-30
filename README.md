@@ -22,7 +22,7 @@
 ```bash
   npm install
 ```
-4. Para correr el proyecto se deben ejecutar los siguientes comandos:
+4. Para correr el proyecto se deben ejecutar el siguiente comando:
 
  En la carpeta jesters-website ejecutar:
 
@@ -30,11 +30,16 @@
   npm run start
 ```
 
- Abrir otra terminal, moverse en la carpeta client y ejecutar el siguiente comando: 
+5. Abrir otra terminal, moverse en la carpeta client y ejecutar el siguiente comando: 
 
 ```bash
   cd client
 ```
+6. Actualizar nuevamente las dependencias de esta ruta
+```bash
+  npm install
+```
+7. Finalmente ejecutar el comando:
 ```bash
   npm run dev
 ```
