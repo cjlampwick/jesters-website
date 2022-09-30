@@ -8,19 +8,19 @@
 1. Clonar el repositorio.
 
 ```bash
-  git clone 
+  git clone https://github.com/cjlampwick/jesters-website.git
 ```
 
 2. Dirigirse al directorio raíz
 
 ```bash
-  cd holitrends
+  cd jesters-website
 ```
 
 3. Actualizar las dependencias y paquetes necesarios.
 
 ```bash
-  composer install
+  npm install
 ```
 4. Para correr el proyecto se deben ejecutar los siguientes comandos:
 
