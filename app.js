@@ -35,11 +35,15 @@ app.post("/coworking", (request, response) => {
     userId: request.body.userId,
     dateFrom: request.body.dateFrom,
     dateTo: request.body.dateTo,
-    halfFrom: 1,
-    halfTo: 2,
+    halfFrom: request.body.halfFrom,
+    halfTo: request.body.halfTo,
     // pointmentStatus: request.body.ppointmentStatus,
   });
-
+console.log(request.body.userId);
+console.log(request.body.dateFrom);
+console.log(request.body.dateTo);
+console.log(request.body.halfFrom);
+console.log(request.body.halfTo);
   appointment
     .save()
     .then((result) => {
@@ -96,6 +100,17 @@ app.post("/register", (request, response) => {
   //   });
   // });
 });
+
+app.get("/appointments/:id", (request, response) => {
+  let userIdd = request.params.id;
+  // let appointment = await Appointment.find({ userId: userId}).exec();
+  let documents = []
+
+  Appointment.find({userId: userIdd}, function (err, docs) {
+    response.status(200).send(docs);
+  });
+
+})
 
 // login endpoint
 app.post("/login", (request, response) => {
@@ -167,6 +182,8 @@ app.post("/login", (request, response) => {
       });
     });
 });
+
+
 
 // free endpoint
 app.get("/free-endpoint", (request, response) => {

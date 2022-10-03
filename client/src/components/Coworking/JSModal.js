@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 import axios from "axios";
 import moment from "moment";
 import Cookies from "universal-cookie";
+
 const cookies = new Cookies();
 
 const baseUrl = "http://localhost:3001/coworking";
@@ -18,6 +19,8 @@ class JSModal extends React.Component {
       userId: "",
       dateFrom : "",
       dateTo: "",
+      halfFrom:"",
+      halfTo:"",
       appointmentStatus: "",
     };
 
@@ -27,6 +30,8 @@ class JSModal extends React.Component {
 
       this.handleClose = this.handleClose.bind(this);
       this.handleShow = this.handleShow.bind(this);
+      this.handleChange = this.handleChange.bind(this);
+      this.reserve = this.reserve.bind(this);
     }
 
     if (props.slotData) {
@@ -38,7 +43,7 @@ class JSModal extends React.Component {
     }
   }
 
-  Reserve = async () => {
+  reserve = async () => {
 
     const idUser = cookies.get("id");
 
@@ -47,7 +52,8 @@ class JSModal extends React.Component {
         userId: idUser,
         dateFrom: this.state.dateFrom,
         dateTo: this.state.dateTo,
-        
+        halfFrom: this.state.halfFrom,
+        halfTo: this.state.halfTo,
       })
       .then((result) => {
         this.saveSuccess(result);
@@ -59,7 +65,6 @@ class JSModal extends React.Component {
 
   handleChange = async (e) => {
     debugger;
-
     await this.setState({
       [e.target.name]: e.target.value,
     });
@@ -95,10 +100,10 @@ class JSModal extends React.Component {
           <Modal.Body>
             <div style={{ display: "flex" }}>
               <div>
-                Desde: <input type="date" value={moment(this.state.startDate).format('YYYY-MM-DD')} name="dateFrom" style={{ height: "40px" }} ></input>
+                Desde: <input type="date" name="dateFrom" style={{ height: "40px" }}  onChange={this.handleChange}></input>
               </div>
               <div style={{ margin: "auto" }}>
-                <Form.Select name="fromHalf" onChange={this.handleChange} style={{ margin: "0", borderRadius: "0px", height: "40px" }}>
+                <Form.Select name="halfFrom" style={{ margin: "0", borderRadius: "0px", height: "40px" }} onChange={this.handleChange}>
                   <option disabled selected>
                     Selecciona el horario
                   </option>
@@ -109,10 +114,10 @@ class JSModal extends React.Component {
             </div>
             <div style={{ display: "flex", marginTop: '10px' }}>
               <div>
-                Hasta:  <input type="date" name="dateTo" style={{ height: "40px" }} ></input>
+                Hasta:  <input type="date" name="dateTo" style={{ height: "40px" }} onChange={this.handleChange} ></input>
               </div>
               <div style={{ margin: "auto" }}>
-                <Form.Select name="toHalf" onChange={this.handleChange} style={{ margin: "0", borderRadius: "0px", height: "40px" }}>
+                <Form.Select name="halfTo" style={{ margin: "0", borderRadius: "0px", height: "40px" }} onChange={this.handleChange}>
                   <option disabled selected>
                     Selecciona el horario
                   </option>
@@ -126,7 +131,7 @@ class JSModal extends React.Component {
             <Button variant="secondary" onClick={this.handleClose}>
               Cerrar
             </Button>
-            <Button variant="primary" onClick={this.Reserve}>
+            <Button variant="primary" onClick={this.reserve}>
               Reservar
             </Button>
           </Modal.Footer>
