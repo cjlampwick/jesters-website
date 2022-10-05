@@ -4,7 +4,8 @@ import moment from "moment";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 
-import JSModal from "../Coworking/JSModal";
+import JSModal from "./JSModalReserve";
+import JSModalEvents from "./JSModalEvents";
 import Spacing from "../Spacing";
 
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
@@ -13,6 +14,7 @@ import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
 import Cookies from "universal-cookie";
+
 const cookies = new Cookies();
 
 const localizer = momentLocalizer(moment);
@@ -23,16 +25,9 @@ class JSCalendar extends React.Component {
   state = {
     events,
     showHidden: false,
+    showHiddenEvent: false,
   };
 
-  // onEventResize = (data) => {
-  //   const { start, end } = data;
-  //   this.setState((state) => {
-  //     state.events[0].start = start;
-  //     state.events[0].end = end;
-  //     return { events: state.events };
-  //   });
-  // };
   componentDidMount() {
     const idUser = cookies.get("id");
     let baseUrl = "/appointments/" + idUser;
@@ -42,7 +37,6 @@ class JSCalendar extends React.Component {
         let events = this.state.events;
 
         result.data.forEach((element) => {
-
           let dateFrom = moment(element.dateFrom).add(3, "hour");
           let dateTo = moment(element.dateTo).add(3, "hour");
           let dateFromStr = dateFrom.format("DD/MM/YYYY");
@@ -56,7 +50,6 @@ class JSCalendar extends React.Component {
             title: title,
             id: element._id,
           });
-          console.log(element);
         });
         this.setState({ events });
       })
@@ -69,10 +62,6 @@ class JSCalendar extends React.Component {
     console.log(data);
   };
 
-  handleSelectEvent = (data) => {
-    alert("seleccionar evento");
-  };
-
   selectSlot = (data) => {
     if (cookies && cookies.get("email")) {
       this.slotData = data;
@@ -82,10 +71,17 @@ class JSCalendar extends React.Component {
     }
   };
 
+  //Modal para reservar
   closeModal = (data) => {
     this.setState({ showHidden: false });
   };
 
+  //Modal para eliminar evento
+  closeModalEvent = (data) => {
+    this.setState({ showHiddenEvent: false });
+  };
+
+  deleteEvent = (data) => {};
   logOut = () => {
     cookies.remove("email", { path: "/" });
     cookies.remove("token", { path: "/" });
@@ -96,8 +92,6 @@ class JSCalendar extends React.Component {
     this.closeModal();
 
     let events = this.state.events;
-
-    debugger;
 
     let dateFrom = moment(result.data.result.dateFrom).add(3, "hour");
     let dateTo = moment(result.data.result.dateTo).add(3, "hour");
@@ -117,7 +111,6 @@ class JSCalendar extends React.Component {
     }
 
     //Eleccion hasta que hora
-    debugger;
     let halfTo = result.data.result.halfTo;
 
     if (halfTo == 1) {
@@ -137,6 +130,21 @@ class JSCalendar extends React.Component {
 
     console.info(JSON.stringify(result));
   };
+  // deleteSuccess = (result) => {
+  //   this.closeModalEvent();
+
+  //   // let events = this.state.events.filter((event) => event.id != this.eventData.id);
+  //   // console.log(events);
+
+  //   // this.setState({events: events}) 
+  // };
+
+  handleSelectEvent = (data) => {
+    if (cookies && cookies.get("email")) {
+      this.eventData = data;
+      this.setState({ showHiddenEvent: true });
+    }
+  };
 
   render() {
     return (
@@ -150,6 +158,13 @@ class JSCalendar extends React.Component {
               onCloseModal={this.closeModal}
               slotData={this.slotData}
               saveSuccess={this.saveSuccess}
+            />
+          )}
+          {this.state.showHiddenEvent && (
+            <JSModalEvents
+              onCloseModalEvent={this.closeModalEvent}
+              eventData={this.eventData}
+              deleteSuccess={this.deleteSuccess}
             />
           )}
         </div>

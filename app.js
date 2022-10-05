@@ -30,6 +30,25 @@ app.post("/test", (request, response) => {
   response.json(request.body);
 });
 
+app.delete("/coworking/:eventId", (request, response) =>{
+  let eventId = request.params.eventId;
+
+  Appointment.deleteOne({_id: eventId}, function (err, docs) {
+    response.status(200).send(docs);
+  });
+})
+
+//SDK Mercadopago
+const mercadopago = require('mercadopago');
+//Agrega credenciales
+mercadopago.configure({
+  access_token: 'PROD_ACCES_TOKEN'
+})
+
+app.get("/checkout", (req, res) => {
+  res.send("<h1> Hola desde checkout");
+});
+
 app.post("/coworking", (request, response) => {
   const appointment = new Appointment({
     userId: request.body.userId,
@@ -39,11 +58,6 @@ app.post("/coworking", (request, response) => {
     halfTo: request.body.halfTo,
     // pointmentStatus: request.body.ppointmentStatus,
   });
-console.log(request.body.userId);
-console.log(request.body.dateFrom);
-console.log(request.body.dateTo);
-console.log(request.body.halfFrom);
-console.log(request.body.halfTo);
   appointment
     .save()
     .then((result) => {
@@ -182,8 +196,6 @@ app.post("/login", (request, response) => {
       });
     });
 });
-
-
 
 // free endpoint
 app.get("/free-endpoint", (request, response) => {

@@ -10,17 +10,16 @@ const cookies = new Cookies();
 
 const baseUrl = "http://localhost:3001/coworking";
 
-class JSModal extends React.Component {
-
+class JSModalReserve extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       userId: "",
-      dateFrom : "",
+      dateFrom: "",
       dateTo: "",
-      halfFrom:"",
-      halfTo:"",
+      halfFrom: "",
+      halfTo: "",
       appointmentStatus: "",
     };
 
@@ -44,7 +43,6 @@ class JSModal extends React.Component {
   }
 
   reserve = async () => {
-
     const idUser = cookies.get("id");
 
     await axios
@@ -64,7 +62,7 @@ class JSModal extends React.Component {
   };
 
   handleChange = async (e) => {
-    debugger;
+    
     await this.setState({
       [e.target.name]: e.target.value,
     });
@@ -78,6 +76,27 @@ class JSModal extends React.Component {
   handleShow() {
     alert(this.state.show);
   }
+  
+   getDate() {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+  
+    if(dd<10) {
+        dd = '0'+dd
+    } 
+  
+    if(mm<10) {
+        mm = '0'+mm
+    } 
+  
+    today = yyyy + '/' + mm + '/' + dd;
+    console.log(today);
+    document.getElementById("date").value = today;
+  }
+  
+  
 
   render() {
     return (
@@ -87,7 +106,7 @@ class JSModal extends React.Component {
           show={this.state.show}
           onHide={this.handleClose}
         >
-          <Modal.Header closeButton style={{margin:"auto"}}>
+          <Modal.Header closeButton style={{ margin: "auto" }}>
             <Modal.Title>
               {this.state.startDate.toLocaleDateString("es-ES", {
                 weekday: "long",
@@ -100,10 +119,24 @@ class JSModal extends React.Component {
           <Modal.Body>
             <div style={{ display: "flex" }}>
               <div>
-                Desde: <input type="date" name="dateFrom" style={{ height: "40px" }}  onChange={this.handleChange}></input>
+                Desde:{""}
+                <span>
+                  <input
+                    type="date"
+                    name="dateFrom"
+                    style={{ height: "40px" }}
+                    onChange={this.handleChange}
+                    id={"date"}
+                    
+                  ></input>
+                </span>
               </div>
               <div style={{ margin: "auto" }}>
-                <Form.Select name="halfFrom" style={{ margin: "0", borderRadius: "0px", height: "40px" }} onChange={this.handleChange}>
+                <Form.Select
+                  name="halfFrom"
+                  style={{ margin: "0", borderRadius: "0px", height: "40px" }}
+                  onChange={this.handleChange}
+                >
                   <option disabled selected>
                     Selecciona el horario
                   </option>
@@ -112,12 +145,22 @@ class JSModal extends React.Component {
                 </Form.Select>
               </div>
             </div>
-            <div style={{ display: "flex", marginTop: '10px' }}>
+            <div style={{ display: "flex", marginTop: "10px" }}>
               <div>
-                Hasta:  <input type="date" name="dateTo" style={{ height: "40px" }} onChange={this.handleChange} ></input>
+                Hasta:{" "}
+                <input
+                  type="date"
+                  name="dateTo"
+                  style={{ height: "40px" }}
+                  onChange={this.handleChange}
+                ></input>
               </div>
               <div style={{ margin: "auto" }}>
-                <Form.Select name="halfTo" style={{ margin: "0", borderRadius: "0px", height: "40px" }} onChange={this.handleChange}>
+                <Form.Select
+                  name="halfTo"
+                  style={{ margin: "0", borderRadius: "0px", height: "40px" }}
+                  onChange={this.handleChange}
+                >
                   <option disabled selected>
                     Selecciona el horario
                   </option>
@@ -127,7 +170,7 @@ class JSModal extends React.Component {
               </div>
             </div>
           </Modal.Body>
-          <Modal.Footer style={{margin:"auto"}}>
+          <Modal.Footer style={{ margin: "auto" }}>
             <Button variant="secondary" onClick={this.handleClose}>
               Cerrar
             </Button>
@@ -141,4 +184,4 @@ class JSModal extends React.Component {
   }
 }
 
-export default JSModal;
+export default JSModalReserve;
