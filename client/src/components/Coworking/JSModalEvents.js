@@ -39,6 +39,7 @@ class JSModalEvents extends React.Component {
     .then((response)=>{
       console.log(response);
       this.handleCloseEvent();
+      window.location.href="http://localhost:3000/coworking/scheduler"
     })
 
   };
@@ -51,7 +52,7 @@ class JSModalEvents extends React.Component {
         onHide={this.onCloseModalEvent}
       >
         <Modal.Header closeButton>
-          <Modal.Title> Desea eliminar este evento?</Modal.Title>
+          <Modal.Title style={{color:"#626262"}}> Desea eliminar este evento?</Modal.Title>
         </Modal.Header>
 
         <Modal.Footer>

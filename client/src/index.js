@@ -13,6 +13,8 @@ import Us from "./components/Pages/Us";
 import University from "./components/Pages/University";
 import Coworking from "./components/Pages/Coworking";
 import Scheduler from "./components/Pages/Scheduler";
+import JestersParty from "./components/Pages/JestersParty";
+import Success from "./components/Pages/Success";
 
 // Generic
 import Header from "./components/Header";
@@ -38,6 +40,8 @@ root.render(
       <Route path="/university" element={<University />} />
       <Route path="/coworking" element={<Coworking />} />
       <Route path="/coworking/scheduler" element={<Scheduler />} />
+      <Route path="/JestersParty" element={<JestersParty />} />
+      <Route path="/Success" element={<Success />} />
     </Routes>
 
     {/* Footer */}

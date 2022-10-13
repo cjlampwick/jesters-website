@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const UserSchema = new mongoose.Schema({
+const compradorSchema = new mongoose.Schema({
 
   fullName: {
     type: String,
@@ -11,20 +11,15 @@ const UserSchema = new mongoose.Schema({
     required: [true, "Please provide an Email!"],
     unique: [true, "Email Exist"],
   },
-  dateBirth: {
-    type: Date,
-    required: [true, "Please provide a date of birth!"],
-    unique: false,
-  },
   dni: {
     type: Number,
     required: [true, "Please provide a DNI!"],
     unique: false,
   },
-  password: {
-    type: String,
-    required: [true, "Please provide a password!"],
+  ticketType: {
+    type: Number,
+    required: [true, "Please provide a ticketType"],
     unique: false,
   },
 })
-module.exports = mongoose.model.Users || mongoose.model("Users", UserSchema);
+module.exports = mongoose.model.comprador || mongoose.model("Comprador", compradorSchema);

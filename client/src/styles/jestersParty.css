@@ -1,0 +1,48 @@
+body {
+    color: white;
+}
+
+.botonCompra{
+    text-align: center;
+    width: 350px;
+    margin: auto;
+}
+.seleccionTipoDeEntrada{
+    margin-top: 2rem!important;
+    margin-Bottom: 2rem!important; 
+}
+.tittle-container {
+    
+    font-size: 2em;
+    text-align: center;
+}
+
+.duo {
+    display: flex;
+    justify-content: center;
+}
+
+.normal-text {
+    text-align: left;
+}
+
+.bix-box {
+    width: 500px;
+}
+
+.cajaMid2 {
+    height: 150px;
+    width: 200px;
+    text-align: center;
+}
+
+.cajaMid2 img {
+    width: 150px;
+}
+
+
+.caja3 {
+    height: 30px;
+    font-size: 2em;
+    text-align: center;
+}

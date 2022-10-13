@@ -6,13 +6,24 @@ const auth = require("./auth");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const dotenv = require("dotenv");
+const bodyParser = require("body-parser");
 
 dotenv.config();
 
+//middleware
+app.use(bodyParser.urlencoded({ extended: false }));
 // require database connection
 const dbConnect = require("./server/db/dbConnect");
 const User = require("./server/db/userModel");
 const Appointment = require("./server/db/appointmentModel");
+const Comprador = require("./server/db/compradorModel");
+//SDK Mercadopago
+const mercadopago = require("mercadopago");
+//Agrega credenciales
+mercadopago.configure({
+  access_token:
+    "APP_USR-2126529931764627-100511-e11cd4721d495d955529b5a4d64e189a-1211400041",
+});
 
 // execute database connection
 dbConnect();
@@ -24,29 +35,91 @@ const { response } = require("express");
 
 app.use(cors());
 
+app.post("/checkout", (req, res) => {
+  console.log(req.body.fullName);
+  console.log(req.body.dni);
+  console.log(req.body.email);
+  console.log(req.body.tipoEntrada);
+  const comprador = new Comprador({
+    fullName: req.body.fullName,
+    email: req.body.email,
+    dni: Number(req.body.dni),
+    ticketType: Number(req.body.tipoEntrada),
+  });
+
+  comprador
+    .save()
+    .then((result) => {
+      response.status(201).send({
+        message: "asdasd",
+        result,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+      response.status(500).send({
+        message: "Error saved date",
+        error,
+      });
+    });
+
+  let preference = {};
+  preference.items = [];
+
+  if (ticketType == 1) {
+    preference.items.push({
+      title: "Entrada Jesters Halloween sin disfraz",
+      unit_price: 1500,
+      quantity: 1,
+    })
+  }else{
+    preference.items.push({
+      title: "Entrada Jesters Halloween con disfraz",
+      unit_price: 700,
+      quantity: 1,
+    })
+  }
+
+
+  preference.back_urls = {
+    success: "https://localhost:3000/success",
+    failure: "http://www.failure.com",
+    pending: "http://www.pending.com",
+  };
+
+  preference.payer = {
+    name: fullName,
+    email: email,
+    identification: {
+      type: "DNI",
+      number: dni,
+    },
+  };
+
+  mercadopago.preferences
+    .create(preference)
+    .then(function (response) {
+      console.log("Respuesta de mercadopago");
+      console.log(response.body.init_point);
+      res.redirect(response.body.init_point);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+});
+
 app.post("/test", (request, response) => {
   console.log(JSON.stringify(request.body));
 
   response.json(request.body);
 });
 
-app.delete("/coworking/:eventId", (request, response) =>{
+app.delete("/coworking/:eventId", (request, response) => {
   let eventId = request.params.eventId;
 
-  Appointment.deleteOne({_id: eventId}, function (err, docs) {
+  Appointment.deleteOne({ _id: eventId }, function (err, docs) {
     response.status(200).send(docs);
   });
-})
-
-//SDK Mercadopago
-const mercadopago = require('mercadopago');
-//Agrega credenciales
-mercadopago.configure({
-  access_token: 'PROD_ACCES_TOKEN'
-})
-
-app.get("/checkout", (req, res) => {
-  res.send("<h1> Hola desde checkout");
 });
 
 app.post("/coworking", (request, response) => {
@@ -118,18 +191,16 @@ app.post("/register", (request, response) => {
 app.get("/appointments/:id", (request, response) => {
   let userIdd = request.params.id;
   // let appointment = await Appointment.find({ userId: userId}).exec();
-  let documents = []
+  let documents = [];
 
-  Appointment.find({userId: userIdd}, function (err, docs) {
+  Appointment.find({ userId: userIdd }, function (err, docs) {
     response.status(200).send(docs);
   });
-
-})
+});
 
 // login endpoint
 app.post("/login", (request, response) => {
   // check if email exists
-  console.log("email: ", request.body.email);
   User.findOne({ email: request.body.email })
 
     // if email exists

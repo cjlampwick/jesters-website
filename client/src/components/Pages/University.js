@@ -16,10 +16,10 @@ class University extends React.Component {
           <source src={background} type="video/mp4" />
         </video>
 
-        <div
-          className="App"
-        >
-          University
+        <div className="App">
+          <div className="text-center">
+            
+          </div>
         </div>
       </div>
     );
