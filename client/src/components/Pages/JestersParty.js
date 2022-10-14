@@ -11,7 +11,7 @@ class JestersParty extends React.Component {
     fullName: "",
     email: "",
     dni: "",
-    tipoEntrada: "",
+    ticketType: "",
   };
 
 
@@ -30,7 +30,7 @@ class JestersParty extends React.Component {
         fullName: this.state.fullName,
         email: this.state.email,
         dni: this.state.dni,
-        ticketType: this.state.tipoEntrada,
+        ticketType: this.state.ticketType,
       })
       .then((result) => {
         window.location.href="http://localhost:3000/success"
@@ -87,7 +87,7 @@ class JestersParty extends React.Component {
                 />
                 <br></br>
                 <label style={{ color: "white" }}>Tipo de entrada: </label>
-                <Form.Select aria-label="Default select example" name="tipoEntrada" onChange={this.handleChange}>
+                <Form.Select aria-label="Default select example" name="ticketType" onChange={this.handleChange}>
                   <option>Ingrese tipo de entrada</option>
                   <option value="1">Con disfraz</option>
                   <option value="2">Sin disfraz</option>

@@ -39,12 +39,12 @@ app.post("/checkout", (req, res) => {
   console.log(req.body.fullName);
   console.log(req.body.dni);
   console.log(req.body.email);
-  console.log(req.body.tipoEntrada);
+  console.log(req.body.ticketType);
   const comprador = new Comprador({
     fullName: req.body.fullName,
     email: req.body.email,
     dni: Number(req.body.dni),
-    ticketType: Number(req.body.tipoEntrada),
+    ticketType: Number(req.body.ticketType),
   });
 
   comprador
@@ -66,7 +66,7 @@ app.post("/checkout", (req, res) => {
   let preference = {};
   preference.items = [];
 
-  if (ticketType == 1) {
+  if (this.ticketType == 1) {
     preference.items.push({
       title: "Entrada Jesters Halloween sin disfraz",
       unit_price: 1500,
@@ -88,11 +88,11 @@ app.post("/checkout", (req, res) => {
   };
 
   preference.payer = {
-    name: fullName,
-    email: email,
+    name: this.fullName,
+    email: this.email,
     identification: {
       type: "DNI",
-      number: dni,
+      number: this.dni,
     },
   };
 

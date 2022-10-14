@@ -42,6 +42,14 @@ class JSModalReserve extends React.Component {
     }
   }
 
+  pagar = async () => {
+    const idUser = cookies.get("id");
+
+    await axios
+      .post()
+
+  }
+
   reserve = async () => {
     const idUser = cookies.get("id");
 
@@ -62,7 +70,7 @@ class JSModalReserve extends React.Component {
   };
 
   handleChange = async (e) => {
-    
+
     await this.setState({
       [e.target.name]: e.target.value,
     });
@@ -76,27 +84,27 @@ class JSModalReserve extends React.Component {
   handleShow() {
     alert(this.state.show);
   }
-  
-   getDate() {
+
+  getDate() {
     var today = new Date();
     var dd = today.getDate();
-    var mm = today.getMonth()+1; //January is 0!
+    var mm = today.getMonth() + 1; //January is 0!
     var yyyy = today.getFullYear();
-  
-    if(dd<10) {
-        dd = '0'+dd
-    } 
-  
-    if(mm<10) {
-        mm = '0'+mm
-    } 
-  
+
+    if (dd < 10) {
+      dd = '0' + dd
+    }
+
+    if (mm < 10) {
+      mm = '0' + mm
+    }
+
     today = yyyy + '/' + mm + '/' + dd;
     console.log(today);
     document.getElementById("date").value = today;
   }
-  
-  
+
+
 
   render() {
     return (
@@ -127,7 +135,7 @@ class JSModalReserve extends React.Component {
                     style={{ height: "40px" }}
                     onChange={this.handleChange}
                     id={"date"}
-                    
+
                   ></input>
                 </span>
               </div>
@@ -178,6 +186,10 @@ class JSModalReserve extends React.Component {
               Reservar
             </Button>
           </Modal.Footer>
+          <Button variant="success" style={{width: "90px", margin: "auto", marginBottom: "15px"
+          }} onClick={this.pagar}>
+            Pagar
+          </Button>
         </Modal>
       </>
     );
