@@ -17,6 +17,7 @@ const dbConnect = require("./server/db/dbConnect");
 const User = require("./server/db/userModel");
 const Appointment = require("./server/db/appointmentModel");
 const Comprador = require("./server/db/compradorModel");
+const cors = require("cors");
 //SDK Mercadopago
 const mercadopago = require("mercadopago");
 //Agrega credenciales
@@ -29,10 +30,6 @@ mercadopago.configure({
 dbConnect();
 
 app.use(express.json());
-
-var cors = require("cors");
-const { response } = require("express");
-
 app.use(cors());
 
 app.post("/checkout", (req, res) => {
@@ -51,7 +48,7 @@ app.post("/checkout", (req, res) => {
   comprador
     .save()
     .then((result) => {
-      
+      console.log('comprador creado: ' + result);
     })
     .catch((error) => {
       console.log(error);
@@ -80,8 +77,8 @@ app.post("/checkout", (req, res) => {
 
   preference.back_urls = {
     success: "https://localhost:3000/success",
-    failure: "http://www.failure.com",
-    pending: "http://www.pending.com",
+    failure: "https://localhost:3000/jestersparty",
+    pending: "https://localhost:3000/jestersparty",
   };
 
   preference.payer = {
@@ -93,24 +90,25 @@ app.post("/checkout", (req, res) => {
     },
   };
 
-  let preferenceResponse;
-
   mercadopago.preferences
     .create(preference)
-    .then(function (response) {
+    .then((response) => {
       console.log("Respuesta de mercadopago");
       console.log(response.body.init_point);
-      preferenceResponse = response.body.init_poin;
-      res.json({
-        message: JSON.stringify(preferenceResponse),
-      });
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+      console.log(JSON.stringify(response.body.init_point));
 
-    
-      
+      let preferenceResponse = JSON.stringify(response.body.init_poin);
+      res.status(200).json({
+          message: 'OK',
+          mp_body: response.body,
+        }
+      );
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+
+
 });
 
 app.post("/test", (request, response) => {

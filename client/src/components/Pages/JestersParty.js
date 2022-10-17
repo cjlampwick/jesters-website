@@ -32,7 +32,7 @@ class JestersParty extends React.Component {
       })
       .then((result) => {
         debugger;
-        window.location.href=result.data.message;
+        window.location.href=result.data.mp_body.init_point;
       })
       .catch((error) => {
         error = new Error();
