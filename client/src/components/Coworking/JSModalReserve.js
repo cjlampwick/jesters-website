@@ -41,14 +41,25 @@ class JSModalReserve extends React.Component {
       };
     }
   }
-
+  
   pagar = async () => {
     const idUser = cookies.get("id");
 
     await axios
-      .post()
-
-  }
+      .post(baseUrl, {
+        userId: idUser,
+        dateFrom: this.state.dateFrom,
+        dateTo: this.state.dateTo,
+        halfFrom: this.state.halfFrom,
+        halfTo: this.state.halfTo,
+      })
+      .then((result) => {
+        this.saveSuccess(result);
+      })
+      .catch((error) => {
+        error = new Error();
+      });
+  };
 
   reserve = async () => {
     const idUser = cookies.get("id");
@@ -70,7 +81,6 @@ class JSModalReserve extends React.Component {
   };
 
   handleChange = async (e) => {
-
     await this.setState({
       [e.target.name]: e.target.value,
     });
@@ -103,8 +113,6 @@ class JSModalReserve extends React.Component {
     console.log(today);
     document.getElementById("date").value = today;
   }
-
-
 
   render() {
     return (

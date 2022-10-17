@@ -14,8 +14,6 @@ class JestersParty extends React.Component {
     ticketType: "",
   };
 
-
-
   handleChange = async (e) => {
     
     await this.setState({
@@ -33,7 +31,8 @@ class JestersParty extends React.Component {
         ticketType: this.state.ticketType,
       })
       .then((result) => {
-        window.location.href="http://localhost:3000/success"
+        debugger;
+        window.location.href=result.data.message;
       })
       .catch((error) => {
         error = new Error();

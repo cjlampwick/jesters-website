@@ -46,18 +46,16 @@ app.post("/checkout", (req, res) => {
     dni: Number(req.body.dni),
     ticketType: Number(req.body.ticketType),
   });
+  console.log("despues de instancia");
 
   comprador
     .save()
     .then((result) => {
-      response.status(201).send({
-        message: "asdasd",
-        result,
-      });
+      
     })
     .catch((error) => {
       console.log(error);
-      response.status(500).send({
+      res.status(500).send({
         message: "Error saved date",
         error,
       });
@@ -80,7 +78,6 @@ app.post("/checkout", (req, res) => {
     })
   }
 
-
   preference.back_urls = {
     success: "https://localhost:3000/success",
     failure: "http://www.failure.com",
@@ -96,16 +93,24 @@ app.post("/checkout", (req, res) => {
     },
   };
 
+  let preferenceResponse;
+
   mercadopago.preferences
     .create(preference)
     .then(function (response) {
       console.log("Respuesta de mercadopago");
       console.log(response.body.init_point);
-      res.redirect(response.body.init_point);
+      preferenceResponse = response.body.init_poin;
+      res.json({
+        message: JSON.stringify(preferenceResponse),
+      });
     })
     .catch(function (error) {
       console.log(error);
     });
+
+    
+      
 });
 
 app.post("/test", (request, response) => {
