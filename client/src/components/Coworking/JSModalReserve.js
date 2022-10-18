@@ -16,6 +16,7 @@ class JSModalReserve extends React.Component {
 
     this.state = {
       userId: "",
+      userIdPagar: "",
       dateFrom: "",
       dateTo: "",
       halfFrom: "",
@@ -43,22 +44,26 @@ class JSModalReserve extends React.Component {
   }
   
   pagar = async () => {
-    const idUser = cookies.get("id");
-
+    const idUserPagar = cookies.get("id");
     await axios
-      .post(baseUrl, {
-        userId: idUser,
+      .post("http://localhost:3001/checkoutPagar", {
+        userIdPagar: idUserPagar,
         dateFrom: this.state.dateFrom,
         dateTo: this.state.dateTo,
         halfFrom: this.state.halfFrom,
         halfTo: this.state.halfTo,
       })
       .then((result) => {
-        this.saveSuccess(result);
+        debugger;
+        window.location.href=result.data.mp_body.init_point;
       })
       .catch((error) => {
         error = new Error();
       });
+  };
+  redirect = (evt) => {
+    debugger;
+    window.location.href = "http://localhost:3001/checkout";
   };
 
   reserve = async () => {

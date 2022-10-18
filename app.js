@@ -8,6 +8,8 @@ const app = express();
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
 
+const moment = require('moment');
+
 dotenv.config();
 
 //middleware
@@ -17,6 +19,8 @@ const dbConnect = require("./server/db/dbConnect");
 const User = require("./server/db/userModel");
 const Appointment = require("./server/db/appointmentModel");
 const Comprador = require("./server/db/compradorModel");
+const Reserve = require("./server/db/reserveCoworkingModel");
+
 const cors = require("cors");
 //SDK Mercadopago
 const mercadopago = require("mercadopago");
@@ -32,6 +36,115 @@ dbConnect();
 app.use(express.json());
 app.use(cors());
 
+app.post("/checkoutPagar", (req, res) => {
+  console.log("antes de instancia");
+  console.log(req.body.dateFrom);
+  console.log(req.body.dateTo);
+  console.log(req.body.userIdPagar);
+  console.log(req.body.halfFrom);
+  console.log(req.body.halfTo);
+  const reserveCoworking = new Reserve({
+    dateFrom: Date(req.body.dateFrom),
+    dateTo: Date(req.body.dateTo),
+    userIdPagar: req.body.userIdPagar,
+    halfFrom: Number(req.body.halfFrom),
+    halfTo: Number(req.body.halfTo),
+  });
+  console.log("dedspues de crear");
+  reserveCoworking
+    .save()
+    .then((result) => {
+      console.log('reservador creado: ' + result);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).send({
+        message: "Error saved date",
+        error,
+      });
+    });
+    let preference = {};
+    preference.items = [];
+
+    const dias = this.dateFrom.moment().diff(this.dateTo, "days");
+    console.log(dias);
+    
+    if(dias == 0){
+
+    dias = 1;
+      //Desde las 9 hasta las 18
+      if(this.halfFrom == 1 && this.halfTo == 2){
+        preference.items.push({
+          title: "Reserva para coworking",
+          unit_price: dias*800,
+        })
+      }
+      //Desde las 9 hasta las 13
+      if(this.halfFrom == 1 && this.halfTo == 1){
+        preference.items.push({
+          title: "Reserva para coworking",
+          unit_price: dias*400,
+        })
+      }
+      //Desde las 13 hasta las 18
+      if(this.halfFrom == 2 && this.halfTo == 2){
+        preference.items.push({
+          title: "Reserva para coworking",
+          unit_price: dias*400,
+        })
+      }
+    }else{
+      if(this.halfFrom == 1 && this.halfTo == 2){
+        preference.items.push({
+          title: "Reserva para coworking",
+          unit_price: dias*800,
+        })
+      }
+      //Desde las 9 hasta las 13
+      if(this.halfFrom == 1 && this.halfTo == 1){
+        preference.items.push({
+          title: "Reserva para coworking",
+          unit_price: dias*400,
+        })
+      }
+      //Desde las 13 hasta las 18
+      if(this.halfFrom == 2 && this.halfTo == 2){
+        preference.items.push({
+          title: "Reserva para coworking",
+          unit_price: dias*400,
+        })
+      }
+    }
+    preference.back_urls = {
+      success: "https://localhost:3000/success",
+      failure: "https://localhost:3000/coworking",
+      pending: "https://localhost:3000/coworking",
+    };
+  
+    preference.payer = {
+      name: "jorge",
+      email: "jorge@gmail",
+      identification: {
+        type: "DNI",
+        number: 12345678,
+      },
+    };
+  
+    mercadopago.preferences
+      .create(preference)
+      .then((response) => {
+        console.log("Te envio a MercadoPago");
+        let preferenceResponse = JSON.stringify(response.body.init_poin);
+        res.status(200).json({
+          message: 'OK',
+          mp_body: response.body,
+        }
+        );
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+})
 app.post("/checkout", (req, res) => {
   console.log(req.body.fullName);
   console.log(req.body.dni);
@@ -63,14 +176,14 @@ app.post("/checkout", (req, res) => {
 
   if (this.ticketType == 1) {
     preference.items.push({
-      title: "Entrada Jesters Halloween sin disfraz",
-      unit_price: 1500,
-      quantity: 1,
-    })
-  }else{
-    preference.items.push({
       title: "Entrada Jesters Halloween con disfraz",
       unit_price: 700,
+      quantity: 1,
+    })
+  } else {
+    preference.items.push({
+      title: "Entrada Jesters Halloween sin disfraz",
+      unit_price: 1500,
       quantity: 1,
     })
   }
@@ -93,22 +206,17 @@ app.post("/checkout", (req, res) => {
   mercadopago.preferences
     .create(preference)
     .then((response) => {
-      console.log("Respuesta de mercadopago");
-      console.log(response.body.init_point);
-      console.log(JSON.stringify(response.body.init_point));
-
+      console.log("Te envio a MercadoPago");
       let preferenceResponse = JSON.stringify(response.body.init_poin);
       res.status(200).json({
-          message: 'OK',
-          mp_body: response.body,
-        }
+        message: 'OK',
+        mp_body: response.body,
+      }
       );
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-
-
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 });
 
 app.post("/test", (request, response) => {
@@ -182,18 +290,11 @@ app.post("/register", (request, response) => {
         });
       });
   });
-  // catch error if the password hash isn't successful
-  // .catch((e) => {
-  //   response.status(500).send({
-  //     message: "Password was not hashed successfully",
-  //     e,
-  //   });
-  // });
+
 });
 
 app.get("/appointments/:id", (request, response) => {
   let userIdd = request.params.id;
-  // let appointment = await Appointment.find({ userId: userId}).exec();
   let documents = [];
 
   Appointment.find({ userId: userIdd }, function (err, docs) {
