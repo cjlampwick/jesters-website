@@ -1,7 +1,6 @@
 # Setup Jesters Website
 
 ## Requerimientos
--   Instalar y hacerse una cuenta de MongoDB
 -   Instalar Node.js: version minima 12.15.
 
 ## Instrucciones
