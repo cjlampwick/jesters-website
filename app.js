@@ -36,6 +36,10 @@ dbConnect();
 app.use(express.json());
 app.use(cors());
 
+app.post("/mp_ipn", (req, res) =>{
+  
+})
+
 app.post("/checkoutPagar", (req, res) => {
   console.log("antes de instancia");
   console.log(req.body.dateFrom);
@@ -44,8 +48,8 @@ app.post("/checkoutPagar", (req, res) => {
   console.log(req.body.halfFrom);
   console.log(req.body.halfTo);
   const reserveCoworking = new Reserve({
-    dateFrom: Date(req.body.dateFrom),
-    dateTo: Date(req.body.dateTo),
+    dateFrom: moment(req.body.dateFrom),
+    dateTo: moment(req.body.dateTo),
     userIdPagar: req.body.userIdPagar,
     halfFrom: Number(req.body.halfFrom),
     halfTo: Number(req.body.halfTo),
@@ -66,57 +70,68 @@ app.post("/checkoutPagar", (req, res) => {
     let preference = {};
     preference.items = [];
 
-    const dias = this.dateFrom.moment().diff(this.dateTo, "days");
+    console.log(reserveCoworking.dateFrom);
+    let dias = moment(reserveCoworking.dateFrom).diff(moment(reserveCoworking.dateTo), "days");
+    dias = dias * -1;
     console.log(dias);
     
     if(dias == 0){
 
     dias = 1;
       //Desde las 9 hasta las 18
-      if(this.halfFrom == 1 && this.halfTo == 2){
+      if(reserveCoworking.halfFrom == 1 && reserveCoworking.halfTo == 2){
         preference.items.push({
           title: "Reserva para coworking",
           unit_price: dias*800,
+          quantity: 1,
+
         })
       }
       //Desde las 9 hasta las 13
-      if(this.halfFrom == 1 && this.halfTo == 1){
+      if(reserveCoworking.halfFrom == 1 && reserveCoworking.halfTo == 1){
         preference.items.push({
           title: "Reserva para coworking",
           unit_price: dias*400,
+          quantity: 1,
         })
       }
       //Desde las 13 hasta las 18
-      if(this.halfFrom == 2 && this.halfTo == 2){
+      if(reserveCoworking.halfFrom == 2 && reserveCoworking.halfTo == 2){
         preference.items.push({
           title: "Reserva para coworking",
           unit_price: dias*400,
+          quantity: 1,
         })
       }
     }else{
-      if(this.halfFrom == 1 && this.halfTo == 2){
+      //Desde las 9 hasta las 18
+      if(reserveCoworking.halfFrom == 1 && reserveCoworking.halfTo == 2){
         preference.items.push({
           title: "Reserva para coworking",
           unit_price: dias*800,
+          quantity: 1,
         })
       }
       //Desde las 9 hasta las 13
-      if(this.halfFrom == 1 && this.halfTo == 1){
+      if(reserveCoworking.halfFrom == 1 && reserveCoworking.halfTo == 1){
         preference.items.push({
           title: "Reserva para coworking",
           unit_price: dias*400,
+          quantity: 1,
         })
       }
       //Desde las 13 hasta las 18
-      if(this.halfFrom == 2 && this.halfTo == 2){
+      if(reserveCoworking.halfFrom == 2 && reserveCoworking.halfTo == 2){
         preference.items.push({
           title: "Reserva para coworking",
           unit_price: dias*400,
+          quantity: 1,
+          
         })
       }
     }
     preference.back_urls = {
-      success: "https://localhost:3000/success",
+      success: "http://localhost:3000/coworking/scheduler",
       failure: "https://localhost:3000/coworking",
       pending: "https://localhost:3000/coworking",
     };
@@ -126,7 +141,7 @@ app.post("/checkoutPagar", (req, res) => {
       email: "jorge@gmail",
       identification: {
         type: "DNI",
-        number: 12345678,
+        number: "12345678",
       },
     };
   
@@ -142,6 +157,7 @@ app.post("/checkoutPagar", (req, res) => {
         );
       })
       .catch(function (error) {
+        console.log("error 149");
         console.log(error);
       });
 })

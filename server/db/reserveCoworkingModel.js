@@ -24,7 +24,10 @@ const reserveCoworkingSchema = new mongoose.Schema({
     required: [true, "Please provide an hour"],
     unique: false,
   },
+  // paymentid:{
+  //   type: Boolean,
 
+  // }
   halfTo: {
     type: Number,
     required: [true, "Please provide an hour"],

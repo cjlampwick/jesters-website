@@ -55,6 +55,7 @@ class JSModalReserve extends React.Component {
       })
       .then((result) => {
         debugger;
+        console.log(result.data.mp_body.init_point);
         window.location.href=result.data.mp_body.init_point;
       })
       .catch((error) => {
