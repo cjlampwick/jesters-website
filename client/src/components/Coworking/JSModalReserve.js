@@ -208,6 +208,7 @@ class JSModalReserve extends React.Component {
             </Button>
           </Modal.Footer>
         </Modal>
+        
       </>
     );
   }
