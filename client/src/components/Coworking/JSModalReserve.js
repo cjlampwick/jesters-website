@@ -7,6 +7,7 @@ import moment from "moment";
 import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
+const events = [];
 
 const baseUrl = "http://localhost:3001/coworking";
 
@@ -22,6 +23,7 @@ class JSModalReserve extends React.Component {
       halfFrom: "",
       halfTo: "",
       appointmentStatus: "",
+      events,
     };
 
     if (props.onCloseModal) {
@@ -54,17 +56,20 @@ class JSModalReserve extends React.Component {
         halfTo: this.state.halfTo,
       })
       .then((result) => {
-        debugger;
-        this.saveSuccess(result);
-        console.log(result.data.mp_body.init_point);
+        this.setState({ events });
         window.location.href=result.data.mp_body.init_point;
       })
       .catch((error) => {
         error = new Error();
       });
+      // events.push({
+      //   start: this.state.dateFrom,
+      //   end: this.state.dateTo,
+      //   title: "title",
+      //   id: idUserPagar,
+      // });
   };
   redirect = (evt) => {
-    debugger;
     window.location.href = "http://localhost:3001/checkout";
   };
 
@@ -80,7 +85,8 @@ class JSModalReserve extends React.Component {
         halfTo: this.state.halfTo,
       })
       .then((result) => {
-        this.saveSuccess(result);
+        debugger;
+        window.location.href=result.data.mp_body.init_point;
       })
       .catch((error) => {
         error = new Error();
@@ -201,10 +207,6 @@ class JSModalReserve extends React.Component {
               Reservar
             </Button>
           </Modal.Footer>
-          <Button variant="success" style={{width: "90px", margin: "auto", marginBottom: "15px"
-          }} onClick={this.pagar}>
-            Pagar
-          </Button>
         </Modal>
       </>
     );

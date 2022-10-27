@@ -39,128 +39,6 @@ app.use(cors());
 app.post("/mp_ipn", (req, res) =>{
   
 })
-
-app.post("/checkoutPagar", (req, res) => {
-  console.log("antes de instancia");
-  console.log(req.body.dateFrom);
-  console.log(req.body.dateTo);
-  console.log(req.body.userIdPagar);
-  console.log(req.body.halfFrom);
-  console.log(req.body.halfTo);
-  const reserveCoworking = new Reserve({
-    dateFrom: moment(req.body.dateFrom),
-    dateTo: moment(req.body.dateTo),
-    userIdPagar: req.body.userIdPagar,
-    halfFrom: Number(req.body.halfFrom),
-    halfTo: Number(req.body.halfTo),
-  });
-  console.log("dedspues de crear");
-  reserveCoworking
-    .save()
-    .then((result) => {
-      console.log('reservador creado: ' + result);
-    })
-    .catch((error) => {
-      console.log(error);
-      res.status(500).send({
-        message: "Error saved date",
-        error,
-      });
-    });
-    let preference = {};
-    preference.items = [];
-
-    console.log(reserveCoworking.dateFrom);
-    let dias = moment(reserveCoworking.dateFrom).diff(moment(reserveCoworking.dateTo), "days");
-    dias = dias * -1;
-    console.log(dias);
-    
-    if(dias == 0){
-
-    dias = 1;
-      //Desde las 9 hasta las 18
-      if(reserveCoworking.halfFrom == 1 && reserveCoworking.halfTo == 2){
-        preference.items.push({
-          title: "Reserva para coworking",
-          unit_price: dias*800,
-          quantity: 1,
-
-        })
-      }
-      //Desde las 9 hasta las 13
-      if(reserveCoworking.halfFrom == 1 && reserveCoworking.halfTo == 1){
-        preference.items.push({
-          title: "Reserva para coworking",
-          unit_price: dias*400,
-          quantity: 1,
-        })
-      }
-      //Desde las 13 hasta las 18
-      if(reserveCoworking.halfFrom == 2 && reserveCoworking.halfTo == 2){
-        preference.items.push({
-          title: "Reserva para coworking",
-          unit_price: dias*400,
-          quantity: 1,
-        })
-      }
-    }else{
-      //Desde las 9 hasta las 18
-      if(reserveCoworking.halfFrom == 1 && reserveCoworking.halfTo == 2){
-        preference.items.push({
-          title: "Reserva para coworking",
-          unit_price: dias*800,
-          quantity: 1,
-        })
-      }
-      //Desde las 9 hasta las 13
-      if(reserveCoworking.halfFrom == 1 && reserveCoworking.halfTo == 1){
-        preference.items.push({
-          title: "Reserva para coworking",
-          unit_price: dias*400,
-          quantity: 1,
-        })
-      }
-      //Desde las 13 hasta las 18
-      if(reserveCoworking.halfFrom == 2 && reserveCoworking.halfTo == 2){
-        preference.items.push({
-          title: "Reserva para coworking",
-          unit_price: dias*400,
-          quantity: 1,
-          
-        })
-      }
-    }
-    preference.back_urls = {
-      success: "http://localhost:3000/coworking/scheduler",
-      failure: "https://localhost:3000/coworking",
-      pending: "https://localhost:3000/coworking",
-    };
-  
-    preference.payer = {
-      name: "jorge",
-      email: "jorge@gmail",
-      identification: {
-        type: "DNI",
-        number: "12345678",
-      },
-    };
-  
-    mercadopago.preferences
-      .create(preference)
-      .then((response) => {
-        console.log("Te envio a MercadoPago");
-        let preferenceResponse = JSON.stringify(response.body.init_poin);
-        res.status(200).json({
-          message: 'OK',
-          mp_body: response.body,
-        }
-        );
-      })
-      .catch(function (error) {
-        console.log("error 149");
-        console.log(error);
-      });
-})
 app.post("/checkout", (req, res) => {
   console.log(req.body.fullName);
   console.log(req.body.dni);
@@ -251,20 +129,17 @@ app.delete("/coworking/:eventId", (request, response) => {
 
 app.post("/coworking", (request, response) => {
   const appointment = new Appointment({
+    dateFrom: moment(request.body.dateFrom),
+    dateTo: moment(request.body.dateTo),
     userId: request.body.userId,
-    dateFrom: request.body.dateFrom,
-    dateTo: request.body.dateTo,
-    halfFrom: request.body.halfFrom,
-    halfTo: request.body.halfTo,
+    halfFrom: Number(request.body.halfFrom),
+    halfTo: Number(request.body.halfTo),
     // pointmentStatus: request.body.ppointmentStatus,
   });
   appointment
     .save()
     .then((result) => {
-      response.status(201).send({
-        message: "saved date",
-        result,
-      });
+
     })
     .catch((error) => {
       response.status(500).send({
@@ -272,6 +147,100 @@ app.post("/coworking", (request, response) => {
         error,
       });
     });
+    let preference = {};
+    preference.items = [];
+
+    console.log(appointment.dateFrom);
+    let dias = moment(appointment.dateFrom).diff(moment(appointment.dateTo), "days");
+    dias = dias * -1;
+    console.log(dias);
+    
+    if(dias == 0){
+
+    dias = 1;
+      //Desde las 9 hasta las 18
+      if(appointment.halfFrom == 1 && appointment.halfTo == 2){
+        preference.items.push({
+          title: "Reserva para coworking",
+          unit_price: dias*800,
+          quantity: 1,
+
+        })
+      }
+      //Desde las 9 hasta las 13
+      if(appointment.halfFrom == 1 && appointment.halfTo == 1){
+        preference.items.push({
+          title: "Reserva para coworking",
+          unit_price: dias*400,
+          quantity: 1,
+        })
+      }
+      //Desde las 13 hasta las 18
+      if(appointment.halfFrom == 2 && appointment.halfTo == 2){
+        preference.items.push({
+          title: "Reserva para coworking",
+          unit_price: dias*400,
+          quantity: 1,
+        })
+      }
+    }else{
+      //Desde las 9 hasta las 18
+      if(appointment.halfFrom == 1 && appointment.halfTo == 2){
+        preference.items.push({
+          title: "Reserva para coworking",
+          unit_price: dias*800,
+          quantity: 1,
+        })
+      }
+      //Desde las 9 hasta las 13
+      if(appointment.halfFrom == 1 && appointment.halfTo == 1){
+        preference.items.push({
+          title: "Reserva para coworking",
+          unit_price: dias*400,
+          quantity: 1,
+        })
+      }
+      //Desde las 13 hasta las 18
+      if(appointment.halfFrom == 2 && appointment.halfTo == 2){
+        preference.items.push({
+          title: "Reserva para coworking",
+          unit_price: dias*400,
+          quantity: 1,
+          
+        })
+      }
+    }
+    preference.back_urls = {
+      success: "http://localhost:3000/coworking/scheduler",
+      failure: "https://localhost:3000/coworking",
+      pending: "https://localhost:3000/coworking",
+    };
+  
+    preference.payer = {
+      name: "jorge",
+      email: "jorge@gmail",
+      identification: {
+        type: "DNI",
+        number: "12345678",
+      },
+    };
+  
+    mercadopago.preferences
+      .create(preference)
+      .then((res) => {
+        console.log("Te envio a MercadoPago");
+        let preferenceResponse = JSON.stringify(res.body.init_poin);
+        response.status(200).json({
+          message: 'OK',
+          result: appointment,
+          mp_body: res.body,
+        }
+        );
+      })
+      .catch(function (error) {
+        console.log("error 149");
+        console.log(error);
+      });
 });
 // register endpoint
 app.post("/register", (request, response) => {
